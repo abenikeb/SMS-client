@@ -118,7 +118,6 @@ module.exports = function (webpackEnv) {
       },
       {
         loader: require.resolve("css-loader"),
-        // options: cssOptions,
         options: {
           importLoaders: 1,
           modules: true,
