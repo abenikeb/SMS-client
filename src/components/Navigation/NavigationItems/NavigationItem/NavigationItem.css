@@ -1,0 +1,44 @@
+.NavigationItem {
+  margin: 10px 0;
+  display: block;
+  flex-direction: row;
+  width: 100%;
+}
+
+.NavigationItem a {
+  color: #318260;
+  text-decoration: none;
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
+}
+
+.NavigationItem a:hover,
+.NavigationItem a :active {
+  color: aliceblue;
+}
+
+@media (min-width: 500px) {
+  .NavigationItem {
+    margin: 0;
+    padding: 10px 0;
+    display: block;
+    width: auto;
+    align-items: center;
+  }
+
+  .NavigationItem a {
+    color: #318260;
+    text-decoration: none;
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+  }
+
+  .NavigationItem a:hover,
+  .NavigationItem a :active {
+    color: aliceblue;
+    background-color: beige;
+    border-bottom: 4px solid #fafafa;
+  }
+}

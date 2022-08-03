@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Auxiliary from "../../hoc/Auxiliary";
+import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
 
 class DashBoard extends Component {
   state = {};
