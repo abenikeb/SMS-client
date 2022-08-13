@@ -35,9 +35,6 @@ const Toolbar = (props) => {
             </ul>
           </div>
         </div>
-        {/* <nav>
-          <NavigationItems />
-        </nav> */}
       </div>
     </header>
   );

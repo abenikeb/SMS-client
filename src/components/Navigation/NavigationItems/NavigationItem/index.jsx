@@ -1,26 +1,21 @@
-import React, { Component } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  NavLink,
-} from "react-router-dom";
+import React from "react";
+import { NavLink } from "react-router-dom";
 
 import "./NavigationItem.css";
 
-const NavigationItem = () => {
+const NavigationItem = (props) => {
   return (
-    <Router>
-      <li className="NavigationItem">
-        <NavLink to="/">Dashboard</NavLink>
+    <div>
+      <li className="menu-title">
+        <span>{props.label && props.label}</span>
       </li>
-      <li className="NavigationItem">
-        <NavLink to="/">Customer</NavLink>
+      <li>
+        <NavLink to={props.to} exact={props.exact}>
+          <img src={props.img} alt="dashboard_icon" className="w-5" />
+          {props.page}
+        </NavLink>
       </li>
-      <li className="NavigationItem">
-        <NavLink to="/">Category</NavLink>
-      </li>
-    </Router>
+    </div>
   );
 };
 

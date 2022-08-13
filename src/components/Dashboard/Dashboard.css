@@ -1,0 +1,25 @@
+.card-report-section {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.info-graphics-card-section {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.info-graphics-card-section .card-body-wrap {
+  @apply card-body;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+@media (max-width: 499px) {
+  .card-report-section {
+    flex-direction: column;
+  }
+}

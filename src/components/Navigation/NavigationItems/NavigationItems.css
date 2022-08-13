@@ -1,15 +1,13 @@
 .NavigationItems {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  height: 100%;
+  @apply menu bg-base-100 w-60 p-2 rounded-box shadow-md;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  height: auto;
 }
-
-@media (min-width: 500px) {
+/* mobile view */
+@media (max-width: 499px) {
   .NavigationItems {
-    flex-flow: column;
+    @apply w-32 p-1;
   }
 }

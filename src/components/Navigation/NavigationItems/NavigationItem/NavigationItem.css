@@ -1,8 +1,38 @@
-.NavigationItem {
-  margin: 10px 0;
-  display: block;
-  flex-direction: row;
+Li > a:hover,
+Li > a:active {
+  @apply contrast-150;
+  color: #ffffff;
+  background-color: #258780;
   width: 100%;
+}
+
+Li a img {
+  opacity: 0.7;
+}
+
+.menu-list a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 15px;
+  gap: 5px;
+  font-weight: 400;
+  color: #9c9c9c;
+  font-size: 16px;
+  height: 35px;
+  width: 100%;
+}
+
+.menu-list li img {
+  opacity: 0.5;
+}
+
+.NavigationItem {
+  margin: 0;
+  padding: 10px 0;
+  display: block;
+  width: auto;
+  align-items: center;
 }
 
 .NavigationItem a {
@@ -16,15 +46,16 @@
 .NavigationItem a:hover,
 .NavigationItem a :active {
   color: aliceblue;
+  background-color: beige;
+  border-bottom: 4px solid #fafafa;
 }
 
-@media (min-width: 500px) {
+@media (max-width: 499px) {
   .NavigationItem {
-    margin: 0;
-    padding: 10px 0;
+    margin: 10px 0;
     display: block;
-    width: auto;
-    align-items: center;
+    flex-direction: row;
+    width: 100%;
   }
 
   .NavigationItem a {
@@ -38,7 +69,5 @@
   .NavigationItem a:hover,
   .NavigationItem a :active {
     color: aliceblue;
-    background-color: beige;
-    border-bottom: 4px solid #fafafa;
   }
 }

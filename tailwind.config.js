@@ -8,12 +8,28 @@ module.exports = {
 
   daisyui: {
     styled: true,
-    themes: true,
+    themes: [
+      {
+        mytheme: {
+          primary: "#65C3C8",
+          secondary: "#EF9FBC",
+          accent: "#EEAF3A",
+          neutral: "#291334",
+          info: "#3ABFF8",
+          success: "#36D399",
+          warning: "#FBBD23",
+          error: "#dc2626",
+          "base-100": "#ffffff",
+        },
+      },
+      "cupcake",
+      "cupcake",
+    ],
     base: true,
     utils: true,
     logs: true,
-    rtl: false,
+    rtl: true,
     prefix: "",
-    darkTheme: "light",
+    darkTheme: "cupcake",
   },
 };

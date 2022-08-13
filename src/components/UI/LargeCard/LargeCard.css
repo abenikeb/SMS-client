@@ -1,0 +1,3 @@
+.card-container {
+  @apply card w-full bg-base-100 shadow-xl;
+}

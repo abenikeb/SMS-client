@@ -1,0 +1,13 @@
+.container {
+  @apply font-sans shadow-md;
+  border-radius: 5px;
+  box-shadow: inset 15px #b4b4b8;
+  width: 100%;
+  height: auto;
+  padding: 10px;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: 700;
+}

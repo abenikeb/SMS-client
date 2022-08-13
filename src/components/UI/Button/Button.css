@@ -1,0 +1,7 @@
+.btn-primary {
+  @apply btn btn-active btn-primary;
+}
+
+.btn-success {
+  @apply btn btn-active btn-success;
+}
