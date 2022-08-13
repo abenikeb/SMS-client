@@ -1,8 +1,9 @@
 import "./Button.css";
+
 const Button = (props) => {
   return (
     <div>
-      <button class={props.button_classes}>{props.label}</button>
+      <button className={props.btn_class}>{props.label}</button>
     </div>
   );
 };
