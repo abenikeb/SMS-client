@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Button from "../Button/Button";
 
 class Table extends Component {
   state = {};
@@ -14,76 +15,46 @@ class Table extends Component {
                 </label>
               </th>
               <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
+              <th>Category</th>
+              <th>Tel</th>
+              <th>Teritory</th>
+              <th>City</th>
               <th></th>
             </tr>
           </thead>
 
           <tbody>
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" class="checkbox" />
-                </label>
-              </th>
-              <td>
-                <div class="flex items-center space-x-3">
-                  <div class="avatar">
-                    <div class="mask mask-squircle w-6 h-6">
-                      <img
-                        src="/tailwind-css-component-profile-2@56w.png"
-                        alt="Avatar Tailwind CSS Component"
-                      />
+            {this.props.customers.map((customer) => (
+              <tr>
+                <th>
+                  <label>
+                    <input type="checkbox" class="checkbox" />
+                  </label>
+                </th>
+                <td>
+                  <div class="flex items-center space-x-3">
+                    <div class="avatar">
+                      <div class="mask mask-squircle w-6 h-6">
+                        <img
+                          src="/tailwind-css-component-profile-2@56w.png"
+                          alt="Avatar"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <div class="font-bold">{customer.fullName}</div>
                     </div>
                   </div>
-                  <div>
-                    <div class="font-bold">Hart Hagerty</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Zemlak, Daniel and Leannon
-                <br />
-              </td>
-              <td>Purple</td>
-              <th>
-                <button class="btn btn-ghost btn-xs">details</button>
-              </th>
-            </tr>
-
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" class="checkbox" />
-                </label>
-              </th>
-              <td>
-                <div class="flex items-center space-x-3">
-                  <div class="avatar">
-                    <div class="mask mask-squircle w-6 h-6">
-                      <img
-                        src="/tailwind-css-component-profile-3@56w.png"
-                        alt="Avatar Tailwind CSS Component"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="font-bold">Brice Swyre</div>
-                    <div class="text-sm opacity-50">China</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Carroll Group
-                <br />
-                <span class="badge badge-ghost badge-sm">Tax Accountant</span>
-              </td>
-              <td>Red</td>
-              <th>
-                <button class="btn btn-ghost btn-xs">details</button>
-              </th>
-            </tr>
+                </td>
+                <td>{customer.category.name}</td>
+                <td>{customer.tel}</td>
+                <td>{customer.territory}</td>
+                <td>{customer.city}</td>
+                <td>
+                  <Button label="Action" btn_class="btn-success-ghost" />
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

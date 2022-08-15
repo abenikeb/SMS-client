@@ -16,7 +16,7 @@ const NavigationItems = () => {
           exact
         />
         <NavigationItem
-          to="/add_customer"
+          to="/customer/new"
           label="Customer"
           page="Add Customer"
           img={home_black}

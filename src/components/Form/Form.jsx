@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
+import Select from "../UI/Select/Select";
 
 class Form extends Component {
   state = {
@@ -9,7 +10,6 @@ class Form extends Component {
   };
 
   handleChange = ({ target }) => {
-    // console.log(target);
     const data = { ...this.state.data };
     data[target.name] = target.value;
     this.setState({ data });
@@ -33,20 +33,16 @@ class Form extends Component {
     );
   };
 
-  renderSelect = (label) => {
+  renderSelect = (label, name, categories) => {
+    const { data } = this.state;
     return (
-      <div class="form-control w-full max-w-xs">
-        <label class="label">
-          <span class="label-text">{label}</span>
-        </label>
-        <select class="select select-bordered">
-          <option disabled selected>
-            Pick one
-          </option>
-          <option>Star Wars</option>
-          <option>Harry Potter</option>
-        </select>
-      </div>
+      <Select
+        label={label}
+        name={name}
+        options={categories}
+        value={data[name]}
+        onChange={this.handleChange}
+      />
     );
   };
 

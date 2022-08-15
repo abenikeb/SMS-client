@@ -1,10 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
 import Form from "../../components/Form/Form";
+import { getCustomers } from "../../services/fakeCustomerServices";
+import { getCategories } from "../../services/fakeCategoryService";
+import { saveCustomer } from "../../services/fakeCustomerServices";
 
 import "./AddCustomer.css";
 
-class AddCustomer extends Form {
+class Customer extends Form {
   state = {
     data: {
       fullName: "",
@@ -16,11 +19,19 @@ class AddCustomer extends Form {
       customerType: "",
       approvedBy: "",
     },
+    customers: [],
+    categories: [],
     error: null,
   };
 
+  componentDidMount() {
+    const customers = getCustomers();
+    const categories = getCategories();
+    this.setState({ customers, categories });
+  }
+
   doSubmit = () => {
-    console.log("this state", this.state.data);
+    saveCustomer(this.state.data);
   };
 
   render() {
@@ -31,7 +42,11 @@ class AddCustomer extends Form {
           <form onSubmit={this.handleSubmit}>
             <section className="input-container">
               {this.renderInput("Name", "fullName")}
-              {this.renderSelect("Category")}
+              {this.renderSelect(
+                "Category",
+                "categoryId",
+                this.state.categories
+              )}
               {this.renderInput("Tel", "tel")}
               {this.renderInput("City", "city")}
               {this.renderInput("Email", "email")}
@@ -50,4 +65,4 @@ class AddCustomer extends Form {
   }
 }
 
-export default AddCustomer;
+export default Customer;

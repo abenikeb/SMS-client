@@ -4,6 +4,18 @@ h1 {
   margin-bottom: 15px;
 }
 
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+header > div {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
 .container {
   @apply font-sans shadow-md;
   border-radius: 5px;
