@@ -4,11 +4,11 @@ class Pagination extends Component {
   state = {};
   render() {
     return (
-      <div class="btn-group">
-        <button class="btn">1</button>
-        <button class="btn btn-active">2</button>
-        <button class="btn">3</button>
-        <button class="btn">4</button>
+      <div className="btn-group">
+        <button className="btn">1</button>
+        <button className="btn btn-active">2</button>
+        <button className="btn">3</button>
+        <button className="btn">4</button>
       </div>
     );
   }

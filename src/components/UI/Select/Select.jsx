@@ -1,15 +1,15 @@
 import React from "react";
 import "./select.css";
 
-const Select = ({ label, name, options, value, onChange }) => {
+const Select = ({ label, name, options, error, value, onChange }) => {
   return (
     <div>
-      <div class="form-control w-full max-w-xs">
-        <label class="label">
-          <span class="label-text">{label}</span>
+      <div className="form-control w-full max-w-xs">
+        <label className="label">
+          <span className="label-text">{label}</span>
         </label>
         <select
-          class="input-style"
+          className="input-style"
           name={name}
           value={value}
           onChange={onChange}
@@ -20,6 +20,13 @@ const Select = ({ label, name, options, value, onChange }) => {
             </option>
           ))}
         </select>
+        <label className="label">
+          {error && (
+            <span className="label-text bg-red-400 text-white rounded-md w-full h-8 flex justify-center items-center">
+              {error}
+            </span>
+          )}
+        </label>
       </div>
     </div>
   );

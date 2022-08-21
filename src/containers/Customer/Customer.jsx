@@ -1,4 +1,5 @@
 import React from "react";
+import Joi from "joi-browser";
 import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
 import Form from "../../components/Form/Form";
 import { getCustomers } from "../../services/fakeCustomerServices";
@@ -21,7 +22,18 @@ class Customer extends Form {
     },
     customers: [],
     categories: [],
-    error: null,
+    error: {},
+  };
+
+  schema = {
+    fullName: Joi.string().required().label("Full Name"),
+    categoryId: Joi.string().required().label("Category"),
+    tel: Joi.string().required().label("Tel No"),
+    city: Joi.string().required().label("City"),
+    email: Joi.string().required().label("Email"),
+    territory: Joi.string().required().label("Territory"),
+    customerType: Joi.string().required().label("Customer Type"),
+    approvedBy: Joi.string().required().label("Approved By"),
   };
 
   componentDidMount() {
@@ -32,6 +44,7 @@ class Customer extends Form {
 
   doSubmit = () => {
     saveCustomer(this.state.data);
+    alert("Success Full submited");
   };
 
   render() {

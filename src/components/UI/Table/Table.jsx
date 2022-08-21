@@ -5,13 +5,13 @@ class Table extends Component {
   state = {};
   render() {
     return (
-      <div class="overflow-x-auto w-full">
-        <table class="table w-full">
+      <div className="overflow-x-auto w-full">
+        <table className="table w-full">
           <thead>
             <tr>
               <th>
                 <label>
-                  <input type="checkbox" class="checkbox" />
+                  <input type="checkbox" className="checkbox" />
                 </label>
               </th>
               <th>Name</th>
@@ -28,13 +28,13 @@ class Table extends Component {
               <tr>
                 <th>
                   <label>
-                    <input type="checkbox" class="checkbox" />
+                    <input type="checkbox" className="checkbox" />
                   </label>
                 </th>
                 <td>
-                  <div class="flex items-center space-x-3">
-                    <div class="avatar">
-                      <div class="mask mask-squircle w-6 h-6">
+                  <div className="flex items-center space-x-3">
+                    <div className="avatar">
+                      <div className="mask mask-squircle w-6 h-6">
                         <img
                           src="/tailwind-css-component-profile-2@56w.png"
                           alt="Avatar"
@@ -42,7 +42,7 @@ class Table extends Component {
                       </div>
                     </div>
                     <div>
-                      <div class="font-bold">{customer.fullName}</div>
+                      <div className="font-bold">{customer.fullName}</div>
                     </div>
                   </div>
                 </td>
