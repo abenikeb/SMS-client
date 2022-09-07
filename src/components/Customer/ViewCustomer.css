@@ -1,0 +1,32 @@
+h1 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+h2 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+h3 {
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 7px;
+}
+
+.header-wrap {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  padding-left: 15px;
+  margin-top: 15px;
+  margin-bottom: 25px;
+}

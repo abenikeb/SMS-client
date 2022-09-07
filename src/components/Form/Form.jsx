@@ -42,6 +42,7 @@ class Form extends Component {
 
     const error = this.validate();
     const errCount = Object.keys(error).length;
+    console.log("SUBMITED", error);
     if (errCount > 0) {
       for (let err of error.details) {
         errors[err.path[0]] = err.message;
@@ -49,7 +50,6 @@ class Form extends Component {
     }
 
     this.setState({ error: errors });
-
     if (errCount > 0) return;
 
     this.doSubmit();

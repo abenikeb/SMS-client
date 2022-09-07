@@ -1,0 +1,73 @@
+.container {
+  @apply font-sans shadow-md;
+  border-radius: 5px;
+  box-shadow: inset 15px #b4b4b8;
+  width: 100%;
+  height: 500px;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+header > div {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.drop-down-wrap {
+  position: relative;
+}
+
+.drop-down-btn {
+  @apply btn btn-sm btn-primary;
+  z-index: 999;
+  cursor: pointer;
+}
+
+.drop-down-content {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #fafafa;
+  transform: translateY(-2em);
+  z-index: -1;
+  transition: all 0.5s ease-in-out 0s, visibility 0s linear 0.3s,
+    z-index 0s linear 0.01s;
+}
+
+.drop-down-wrap:focus .drop-down-content,
+.drop-down-wrap:focus-within .drop-down-content {
+  visibility: visible;
+  opacity: 1;
+  z-index: 1;
+  transform: translateY(0%);
+  transition-delay: 0s, 0s, 0.3s;
+}
+
+.drop-down-content > ul {
+  @apply shadow-md rounded-sm w-20;
+}
+
+.drop-down-content > ul > li {
+  @apply text-xs text-gray-600 px-3;
+}
+
+.drop-down-content > ul > li > button {
+  @apply btn btn-sm btn-ghost;
+}

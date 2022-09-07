@@ -2,32 +2,19 @@ import React from "react";
 import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
 import Form from "../../components/Form/Form";
 
-// import "./AddCustomer.css";
-
 class Search extends Form {
-  state = {
-    data: {
-      searchQuery: "",
-    },
-    error: null,
-  };
-
-  doSubmit = () => {
-    console.log("this state", this.state.data);
-  };
-
   render() {
     return (
       <Auxiliary>
-        <form onSubmit={this.handleSubmit}>
+        <form>
           <div className="form-control w-full max-w-xs">
             <input
               name="searchQuery"
-              value={this.state.data.searchQuery}
-              onChange={this.props.handleSearch}
+              value={this.props.searchQuery}
+              onChange={this.props.onChange}
               type="text"
               placeholder="Seacrh here..."
-              className="input input-bordered w-full"
+              className="input input-bordered w-64 h-10 rounded-md"
             />
           </div>
         </form>

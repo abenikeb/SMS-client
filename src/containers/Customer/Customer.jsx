@@ -1,39 +1,19 @@
 import React from "react";
-import Joi from "joi-browser";
 import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
 import Form from "../../components/Form/Form";
 import { getCustomers } from "../../services/fakeCustomerServices";
 import { getCategories } from "../../services/fakeCategoryService";
-import { saveCustomer } from "../../services/fakeCustomerServices";
-
-import "./AddCustomer.css";
-
+import Modal from "../../components/UI/Modal/Modal";
+import List from "./List/List";
+import ViewCustomer from "../../components/Customer/ViewCustomer";
 class Customer extends Form {
   state = {
-    data: {
-      fullName: "",
-      categoryId: "",
-      tel: "",
-      city: "",
-      email: "",
-      territory: "",
-      customerType: "",
-      approvedBy: "",
-    },
     customers: [],
     categories: [],
-    error: {},
-  };
-
-  schema = {
-    fullName: Joi.string().required().label("Full Name"),
-    categoryId: Joi.string().required().label("Category"),
-    tel: Joi.string().required().label("Tel No"),
-    city: Joi.string().required().label("City"),
-    email: Joi.string().required().label("Email"),
-    territory: Joi.string().required().label("Territory"),
-    customerType: Joi.string().required().label("Customer Type"),
-    approvedBy: Joi.string().required().label("Approved By"),
+    currentPage: 1,
+    pageSize: 5,
+    sortColumn: { path: "name", order: "acs" },
+    viewModal: false,
   };
 
   componentDidMount() {
@@ -42,37 +22,41 @@ class Customer extends Form {
     this.setState({ customers, categories });
   }
 
-  doSubmit = () => {
-    saveCustomer(this.state.data);
-    alert("Success Full submited");
+  handlePageChange = (page) => {
+    this.setState((prevState, props) => {
+      return {
+        currentPage: page,
+      };
+    });
+  };
+
+  handleSort = (sortColumn) => {
+    this.setState({ sortColumn });
+  };
+
+  handleModalClose = () => {
+    this.setState({ viewModal: false });
+  };
+
+  handleOpenModal = () => {
+    this.setState({ viewModal: true });
   };
 
   render() {
     return (
       <Auxiliary>
-        <section className="container">
-          <h1>Add Customer</h1>
-          <form onSubmit={this.handleSubmit}>
-            <section className="input-container">
-              {this.renderInput("Name", "fullName")}
-              {this.renderSelect(
-                "Category",
-                "categoryId",
-                this.state.categories
-              )}
-              {this.renderInput("Tel", "tel")}
-              {this.renderInput("City", "city")}
-              {this.renderInput("Email", "email")}
-              {this.renderInput("Territory", "territory")}
-              {this.renderInput("CustomerType", "customerType")}
-              {this.renderInput("ApprovedBy", "approvedBy")}
-            </section>
-            <section className="button-container">
-              {this.renderButton("Discard", "btn-success-ghost")}
-              {this.renderButton("Submit", "btn-primary-wrap")}
-            </section>
-          </form>
-        </section>
+        <List
+          customers={this.state.customers}
+          currentPage={this.state.currentPage}
+          pageSize={this.state.pageSize}
+          onHandlePageChange={this.handlePageChange}
+          sortColumns={this.state.sortColumn}
+          onSort={this.handleSort}
+          openModals={this.handleOpenModal}
+        />
+        <Modal show={this.state.viewModal} closeModal={this.handleModalClose}>
+          <ViewCustomer />
+        </Modal>
       </Auxiliary>
     );
   }

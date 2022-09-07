@@ -22,7 +22,7 @@ const NavigationItems = () => {
           img={home_black}
         />
         <NavigationItem
-          to="/view_customer"
+          to="/customers"
           page="View Customer"
           img={dashboard_icon}
         />
