@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
-
 import Dashboard from "../../components/Dashboard/Dashboard";
 
 class DashBoard extends Component {

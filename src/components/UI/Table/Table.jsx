@@ -6,7 +6,6 @@ const Table = ({ items, columns, sortColumns, onSort }) => {
   return (
     <div className="overflow-x-auto w-full">
       <table className="table w-full">
-        {/* {console.log("sortColumns", sortColumns)} */}
         <TableHeader
           columns={columns}
           sortColumns={sortColumns}

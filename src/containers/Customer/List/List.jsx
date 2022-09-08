@@ -5,7 +5,6 @@ import Table from "../../../components/UI/Table/Table";
 import Search from "../../../components/SearchBox/Search";
 import Pagination from "../../../components/UI/Pagination/Pagination";
 import Button from "../../../components/UI/Button/Button";
-import paginate from "../../../components/utils/paginate";
 import { Link } from "react-router-dom";
 import "./List.css";
 
@@ -15,23 +14,19 @@ class List extends Component {
     this.buttonAction = React.createRef();
   }
 
-  state = {
-    searchQuery: "",
-  };
-
   columns = [
     {
       key: "select",
       content: (customer) => <input type="checkbox" className="checkbox" />,
     },
     {
-      path: "fullName",
+      path: "first_name",
       label: "Name",
       content: (customer) => (
-        <Link to={`customer/${customer._id}`}>{customer.fullName}</Link>
+        <Link to={`customer/${customer.id}`}>{customer.first_name}</Link>
       ),
     },
-    { path: "category.name", label: "Category" },
+    { path: "name", label: "Category" },
     { path: "tel", label: "Tel" },
     { path: "territory", label: "Teritory" },
     { path: "city", label: "City" },
@@ -47,7 +42,7 @@ class List extends Component {
               <li>
                 <Link
                   className="btn btn-sm btn-ghost"
-                  to={`/customer/${customer._id}`}
+                  to={`/customer/${customer.id}`}
                 >
                   Edit
                 </Link>
@@ -62,25 +57,9 @@ class List extends Component {
     },
   ];
 
-  handleSearch = ({ target }) => {
-    // console.log("target.value", target.value);
-    this.setState({ searchQuery: target.value });
-  };
-
   render() {
-    const { customers: allCustomers, currentPage, pageSize } = this.props;
-    const { searchQuery } = this.state;
-    const itemsSize = this.props.customers.length;
+    const { currentPage, pageSize, itemsSize, paginateItems } = this.props;
 
-    let filtered = allCustomers;
-
-    if (searchQuery) {
-      filtered = allCustomers.filter((m) =>
-        m.fullName.toLowerCase().startsWith(searchQuery.toLowerCase())
-      );
-    }
-
-    let paginateItems = paginate(filtered, currentPage, pageSize);
     return (
       <Auxiliary>
         <div className="container">
@@ -89,14 +68,16 @@ class List extends Component {
           <header>
             <div>
               <Search
-                searchValue={this.state.searchQuery}
-                onChange={this.handleSearch}
+                searchValue={this.props.searchQuery}
+                onChange={this.props.onSearch}
               />
             </div>
             <div>
               <Button label="Import Excel" btn_class="btn-success-ghost" />
               <Button label="Export Excel" btn_class="btn-success-ghost" />
-              <Button label="Add Customer" btn_class="btn-primary-wrap" />
+              <Link to="/customer/new" className="btn btn-primary btn-sm">
+                Add Customer
+              </Link>
             </div>
           </header>
           <Table

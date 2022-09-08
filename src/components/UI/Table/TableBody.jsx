@@ -1,6 +1,6 @@
 import _ from "lodash";
 import React, { Component } from "react";
-import Button from "../Button/Button";
+
 class TableBody extends Component {
   state = {
     toggleButton: false,
@@ -17,10 +17,10 @@ class TableBody extends Component {
   render() {
     const { items, columns } = this.props;
 
-    return (
+    let body = (
       <tbody>
         {items.map((item) => (
-          <tr key={item._id}>
+          <tr key={item.id}>
             {columns.map((column) => (
               <td key={column.path || column.key}>
                 {this.renderCell(item, column)}
@@ -30,6 +30,12 @@ class TableBody extends Component {
         ))}
       </tbody>
     );
+
+    if (items.length === 0) {
+      body = <p className="p-10">No items found</p>;
+    }
+
+    return body;
   }
 }
 

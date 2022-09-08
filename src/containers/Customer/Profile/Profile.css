@@ -10,13 +10,13 @@ h1 {
   box-shadow: inset 15px #b4b4b8;
   width: 100%;
   min-height: 600px;
-  max-height: 900px;
+  max-height: 1000px;
   padding: 10px 70px;
 }
 
 .container .input-container {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto auto auto;
   width: 100%;
 }
 
