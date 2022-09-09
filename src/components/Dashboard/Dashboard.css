@@ -1,13 +1,18 @@
+.cotainer {
+  gap: 50px 20px;
+}
+
 .card-report-section {
   display: flex;
   flex-direction: row;
-  gap: 15px;
+  gap: 25px;
+  margin-bottom: 30px;
 }
 
 .info-graphics-card-section {
   display: flex;
   flex-direction: row;
-  gap: 15px;
+  gap: 25px;
   margin-top: 10px;
 }
 

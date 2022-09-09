@@ -48,7 +48,9 @@ class List extends Component {
                 </Link>
               </li>
               <li>
-                <button onClick={this.props.openModals}>View</button>
+                <button onClick={() => this.props.raiseProperty(customer)}>
+                  View
+                </button>
               </li>
             </ul>
           </div>

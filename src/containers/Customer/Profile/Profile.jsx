@@ -139,7 +139,9 @@ class Customer extends Form {
         });
         this.setState({ error });
       }
-
+      if (ex.response && ex.response.status === 401) {
+        toast.info(ex.response.data.message);
+      }
       this.setState({ loading: false });
     }
   };

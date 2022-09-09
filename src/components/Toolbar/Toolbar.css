@@ -1,5 +1,5 @@
 .Toolbar {
-  @apply navbar bg-base-100 shadow-md pr-6;
+  @apply bg-base-100 shadow-md pr-6;
   /* height: 56px;
   width: 100%;
   position: fixed;
@@ -24,6 +24,49 @@
 
 .menu {
   display: none;
+}
+
+.drop-downWrap {
+  position: relative;
+}
+
+.drop-downContent {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 100%;
+  right: 140px;
+  width: 100%;
+  background-color: #fafafa;
+  transform: translateY(-2em);
+  z-index: -1;
+  transition: all 0.5s ease-in-out 0s, visibility 0s linear 0.3s,
+    z-index 0s linear 0.01s;
+}
+
+.drop-downWrap:focus .drop-downContent,
+.drop-downWrap:focus-within .drop-downContent {
+  visibility: visible;
+  opacity: 1;
+  z-index: 1;
+  transform: translateY(0%);
+  transition-delay: 0s, 0s, 0.3s;
+}
+
+.drop-downContent > ul {
+  @apply mt-3 p-2 shadow bg-base-100 rounded-box w-52;
+}
+
+.drop-downContent > ul > li {
+  @apply px-3 text-sm;
+}
+
+.drop-downContent > ul > li > a {
+  @apply cursor-pointer w-full p-2;
+}
+
+.drop-downContent > ul > li > a:hover {
+  @apply bg-slate-300;
 }
 
 @media (max-width: 499px) {

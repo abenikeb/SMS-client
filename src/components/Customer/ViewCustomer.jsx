@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 
 import "./ViewCustomer.css";
 
-const ViewCustomer = () => {
+const ViewCustomer = ({ customer }) => {
   return (
     <div>
       <section className="header-wrap">
@@ -13,10 +13,10 @@ const ViewCustomer = () => {
           />
         </div>
         <div>
-          <h1>Bekele Girirma</h1>
-          <p>0913228892</p>
-          <p>Addis Ababa, Ethiopia</p>
-          <p>abenikeb7@gmail.com</p>
+          <h1>{`${customer.first_name} ${customer.last_name}`}</h1>
+          <p>{`${customer.tel}`}</p>
+          <p>{`${customer.city}`}, Ethiopia</p>
+          <p>{`${customer.email}`}</p>
         </div>
       </section>
       <hr />
@@ -26,17 +26,17 @@ const ViewCustomer = () => {
 
         <div>
           <p>Email</p>
-          <h3>abenikeb7@gmail.com</h3>
+          <h3>{`${customer.email}`}</h3>
         </div>
 
         <div>
           <p>Phone</p>
-          <h3>0913228892</h3>
+          <h3>{`${customer.tel}`}</h3>
         </div>
 
         <div>
-          <p>Email</p>
-          <h3>abenikeb7@gmail.com</h3>
+          <p>Terrotory</p>
+          <h3>{`${customer.territory}`}</h3>
         </div>
       </section>
     </div>

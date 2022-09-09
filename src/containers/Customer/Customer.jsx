@@ -1,11 +1,14 @@
 import React from "react";
+import _ from "lodash";
+
+import { getCustomers, getCategories } from "../../services/customerServices";
 import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
 import Form from "../../components/Form/Form";
-import { getCustomers, getCategories } from "../../services/customerServices";
 import Modal from "../../components/UI/Modal/Modal";
 import List from "./List/List";
 import paginate from "../../components/utils/paginate";
 import ViewCustomer from "../../components/Customer/ViewCustomer";
+import Spinner from "../../components/UI/Spinner/Spinner";
 
 class Customer extends Form {
   constructor(props) {
@@ -13,6 +16,7 @@ class Customer extends Form {
     this.state = {
       customers: [],
       categories: [],
+      property: null,
       currentPage: 1,
       pageSize: 5,
       searchQuery: "",
@@ -47,6 +51,10 @@ class Customer extends Form {
     this.setState({ viewModal: true });
   };
 
+  handleraiseProperty = (customer) => {
+    this.setState({ viewModal: true, property: customer });
+  };
+
   handleSearch = ({ target }) => {
     this.setState({ searchQuery: target.value, currentPage: 1 });
   };
@@ -57,6 +65,8 @@ class Customer extends Form {
       currentPage,
       pageSize,
       searchQuery,
+      sortColumn,
+      property,
     } = this.state;
 
     let filtered = allCustomers;
@@ -67,16 +77,22 @@ class Customer extends Form {
       );
     }
 
-    let paginateItems = paginate(filtered, currentPage, pageSize);
+    let sortedList = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
+
+    let paginateItems = paginate(sortedList, currentPage, pageSize);
     const itemsSize = filtered.length;
 
+    let viewCustomer = <ViewCustomer customer={property} />;
+    if (!property) {
+      viewCustomer = <Spinner />;
+    }
     return (
       <Auxiliary>
         <List
           onHandlePageChange={this.handlePageChange}
           sortColumns={this.state.sortColumn}
           onSort={this.handleSort}
-          openModals={this.handleOpenModal}
+          raiseProperty={this.handleraiseProperty}
           onSearch={this.handleSearch}
           currentPage={currentPage}
           pageSize={pageSize}
@@ -85,7 +101,7 @@ class Customer extends Form {
           paginateItems={paginateItems}
         />
         <Modal show={this.state.viewModal} closeModal={this.handleModalClose}>
-          <ViewCustomer />
+          {viewCustomer}
         </Modal>
       </Auxiliary>
     );

@@ -4,25 +4,24 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [require("daisyui")],
+  plugins: [require("@tailwindcss/typography"), require("daisyui")],
 
   daisyui: {
     styled: true,
     themes: [
       {
         mytheme: {
-          primary: "#65C3C8",
-          secondary: "#EF9FBC",
-          accent: "#EEAF3A",
+          primary: "#2dd4bf",
+          secondary: "#78716c",
+          accent: "#3b82f6",
           neutral: "#291334",
+          "base-100": "#f3f4f6",
           info: "#3ABFF8",
           success: "#36D399",
           warning: "#FBBD23",
           error: "#dc2626",
-          "base-100": "#ffffff",
         },
       },
-      "cupcake",
       "cupcake",
     ],
     base: true,
@@ -30,6 +29,6 @@ module.exports = {
     logs: true,
     rtl: false,
     prefix: "",
-    darkTheme: "cupcake",
+    darkTheme: "light",
   },
 };

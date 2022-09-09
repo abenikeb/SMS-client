@@ -1,9 +1,9 @@
 import React from "react";
-import "./Card.css";
+import "./smallCard.css";
 
 const SmallCard = ({ cardInfo }) => {
   return (
-    <div className="card-container">
+    <div className="card w-96 shadow-md rounded-md ">
       <div className="card-body">
         <article className="card-actions justify-end">
           <button class="btn btn-square btn-ghost">
@@ -23,6 +23,7 @@ const SmallCard = ({ cardInfo }) => {
           </button>
         </article>
         <h1 className="card-title">{cardInfo.title}</h1>
+
         <hr />
         <p className="card-sub-title">{cardInfo.sub_title}</p>
       </div>

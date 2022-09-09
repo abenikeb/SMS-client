@@ -9,7 +9,7 @@ class Dashboard extends Component {
     const { infoGraphicData, salesData } = this.props;
     return (
       <div>
-        <p>Summary</p>
+        <h1>Summary</h1>
 
         <section className="card-report-section">
           {salesData.map((sales) => (
