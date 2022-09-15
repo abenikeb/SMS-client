@@ -8,8 +8,6 @@ import {
   Legend,
 } from "chart.js";
 
-import faker from "faker";
-
 ChartJS.register(
   CategoryScale,
   LinearScale,

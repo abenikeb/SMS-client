@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
 import Dashboard from "../../components/Dashboard/Dashboard";
+import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 
 class DashBoard extends Component {
   state = {
@@ -49,4 +50,4 @@ class DashBoard extends Component {
   }
 }
 
-export default DashBoard;
+export default withErrorHandler(DashBoard);

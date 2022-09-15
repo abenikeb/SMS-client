@@ -1,0 +1,17 @@
+.login-container {
+  @apply shadow-sm rounded-sm;
+  padding-left: 250px;
+  padding-top: 100px;
+  width: 100%;
+  min-height: 600px;
+  max-height: 1000px;
+}
+
+.card-container {
+  @apply card bg-base-100 shadow-xl;
+  width: 550px;
+}
+
+.login-container .button-container {
+  display: flex;
+}

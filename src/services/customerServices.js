@@ -22,10 +22,9 @@ export const getCustomerPaymentType = () => {
 };
 
 export const saveCustomer = (customer) => {
-  console.log("CUSTOMR", customer);
   if (customer.id) {
     let { id, ...newCustomer } = customer;
-    return http.put(`${apiURL}/update-customer-profile`, newCustomer);
+    return http.put(`${apiURL}/update-customer-profile/${id}`, newCustomer);
   }
 
   return http.post(`${apiURL}/create-customer`, customer);
