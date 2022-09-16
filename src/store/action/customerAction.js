@@ -6,6 +6,7 @@ import {
   getCustomerPaymentType,
   saveCustomer,
 } from "../../services/customerServices";
+import { toast } from "react-toastify";
 
 export const initSubmitForm = () => {
   return {
@@ -106,8 +107,15 @@ export const setCategories = (categories) => {
 
 export const initCategories = () => {
   return async (dispatch) => {
-    const { data: categories } = await getCategories();
-    dispatch(setCategories(categories));
+    try {
+      const { data: categories } = await getCategories();
+      dispatch(setCategories(categories));
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        toast.error(ex.response.data);
+        // this.props.navigate("/");
+      }
+    }
   };
 };
 

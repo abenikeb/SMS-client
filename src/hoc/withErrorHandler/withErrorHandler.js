@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Auxiliary from "../Auxiliary/Auxiliary";
 import axios from "axios";
-
 import { toast } from "react-toastify";
 
 const withErrorHandler = (WrrapedComponent) => {
@@ -18,28 +17,26 @@ const withErrorHandler = (WrrapedComponent) => {
 
       this.resInterceptor = axios.interceptors.response.use(
         (res) => res,
-        (error) => {
+        (err) => {
           const ExpectedError =
-            error.response &&
-            error.response.status >= 400 &&
-            error.response.status <= 500;
+            err.response &&
+            err.response.status >= 400 &&
+            err.response.status < 500;
           if (!ExpectedError) {
-            console.log("unexpected error", error);
-            this.setState({ error: error.message });
+            this.setState({ error: err.message });
           }
 
-          // return Promise.reject(error);
+          return Promise.reject(err);
         }
       );
     }
 
-    componentWillUnmount() {
-      axios.interceptors.request.eject(this.reqInterceptor);
-      axios.interceptors.response.eject(this.resInterceptor);
-    }
+    // componentWillUnmount() {
+    //   axios.interceptors.request.eject(this.reqInterceptor);
+    //   axios.interceptors.response.eject(this.resInterceptor);
+    // }
 
     render() {
-      console.log("ABeni", this.state.error);
       return (
         <Auxiliary>
           {this.state.error && toast(this.state.error)}

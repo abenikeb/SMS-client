@@ -16,28 +16,35 @@ class Login extends Form {
     password: Joi.string().required().label("Password"),
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.data !== this.props.data) {
-      console.log("componentDidUpdateFALSE");
-      return false;
-    } else {
-      console.log("componentDidUpdateTRUE");
-      return true;
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevProps.data !== this.props.data) {
+  //     console.log("componentDidUpdateFALSE");
+  //     return false;
+  //   } else {
+  //     console.log("componentDidUpdateTRUE");
+  //     return true;
+  //   }
+  // }
 
   handleBackAction = () => {
     this.props.navigate("/customers");
   };
 
+  componentDidUpdateyy = () => {
+    console.log("CMD_IP", this.props.error);
+    if (this.props.error === {} && this.props.errors === {}) {
+      window.location = "/";
+      console.log("LL", this.props.error);
+      toast("Successfuly Login");
+    }
+  };
+
   doSubmit = async () => {
     try {
       this.props.onLoginUser(this.props.data);
-      setTimeout(() => {
-        window.location = "/";
-      }, 3000);
+      // window.location = "/";
 
-      toast("Successfuly Login");
+      // toast("Successfuly Login");
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         let error = { ...this.props.error };
@@ -48,6 +55,7 @@ class Login extends Form {
   };
 
   render() {
+    this.componentDidUpdateyy();
     let form = (
       <form onSubmit={this.handleSubmit}>
         {this.renderInput("Tel", "tel")}

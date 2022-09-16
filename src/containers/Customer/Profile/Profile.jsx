@@ -7,7 +7,6 @@ import * as actionTypes from "../../../store/action/index";
 import Form from "../../../components/Form/Form";
 
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
-import WithRouter from "../../../hoc/WithRouter/WithRouter";
 import Auxiliary from "../../../hoc/Auxiliary/Auxiliary";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import "./Profile.css";
@@ -31,41 +30,44 @@ class Customer extends Form {
 
   populateCustomer = async () => {
     console.log("POPULATE_CUSTOMER");
-    try {
-      let customerId = this.props.params.id;
-      if (customerId === "new") return;
+    let customerId = this.props.params.id;
+    if (customerId === "new") return;
 
-      this.props.onFetchCustomer(customerId);
-    } catch (ex) {
-      if (ex.response && ex.response.status === 404) {
-        toast.error(ex.response.data.error);
-        this.props.navigate("/not-found");
-      }
-    }
+    this.props.onFetchCustomer(customerId);
+    // try {
+
+    // } catch (ex) {
+    //   if (ex.response && ex.response.status === 404) {
+    //     toast.error(ex.response.data.error);
+    //     this.props.navigate("/not-found");
+    //   }
+    // }
   };
 
   populateCategories = async () => {
     console.log("POPULATE_CATEGORY");
-    try {
-      this.props.onInitCategories();
-    } catch (ex) {
-      if (ex.response && ex.response.status === 400) {
-        toast.error(ex.response.data.error);
-        this.props.navigate("/");
-      }
-    }
+    this.props.onInitCategories();
+    // try {
+
+    // } catch (ex) {
+    //   if (ex.response && ex.response.status === 400) {
+    //     toast.error(ex.response.data.error);
+    //     this.props.navigate("/");
+    //   }
+    // }
   };
 
   populateCustomerType = async () => {
     console.log("POPULATE_CUSTOMER_TYPE");
-    try {
-      this.props.onInitPaymentType();
-    } catch (ex) {
-      if (ex.response && ex.response.status === 400) {
-        toast.error(ex.response.data.error);
-        this.props.navigate("/");
-      }
-    }
+    this.props.onInitPaymentType();
+    // try {
+
+    // } catch (ex) {
+    //   if (ex.response && ex.response.status === 400) {
+    //     toast.error(ex.response.data.error);
+    //     this.props.navigate("/");
+    //   }
+    // }
   };
 
   async componentDidMount() {
@@ -93,15 +95,15 @@ class Customer extends Form {
   };
 
   render() {
-    console.log("RENDER");
+    console.log("RENDER -");
     return (
       <Auxiliary>
         <section className="container">
-          {this.props.params.id === "new" ? (
+          {/* {this.props.params.id === "new" ? (
             <h1>Add Customer</h1>
           ) : (
             <h1>Edit Customer</h1>
-          )}
+          )} */}
 
           {this.props.loading && <Spinner />}
           <form onSubmit={this.handleSubmit}>
@@ -143,8 +145,8 @@ const mapStateToProps = (state) => {
     customer: state.customers.customer,
     categories: state.customers.categories,
     paymentType: state.customers.paymentType,
-    loading: state.customers.loading,
     data: state.customers.data,
+    loading: state.customers.loading,
     error: state.customers.error,
     errors: state.customers.errors,
   };
@@ -152,11 +154,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onInitCustomers: () => {
-      dispatch(actionTypes.initCustomers());
-    },
     onFetchCustomer: (customerId) => {
       dispatch(actionTypes.fetchCustomer(customerId));
+    },
+    onInitCustomers: () => {
+      dispatch(actionTypes.initCustomers());
     },
     onInitCategories: () => {
       dispatch(actionTypes.initCategories());
@@ -167,11 +169,11 @@ const mapDispatchToProps = (dispatch) => {
     onHandleInputChange: (data, errors) => {
       dispatch(actionTypes.changeInput(data, errors));
     },
-    onHandleSubmitError: (error) => {
-      dispatch(actionTypes.changeError(error));
-    },
     onSubmitForm: (data) => {
       dispatch(actionTypes.succesSubmitForm(data));
+    },
+    onHandleSubmitError: (error) => {
+      dispatch(actionTypes.changeError(error));
     },
   };
 };
@@ -179,4 +181,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withErrorHandler(WithRouter(Customer)));
+)(withErrorHandler(Customer));

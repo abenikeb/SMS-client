@@ -1,10 +1,9 @@
 import React from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
-import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 
 import * as customerAction from "../../store/action/index";
-
+import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
 import Form from "../../components/Form/Form";
 import Modal from "../../components/UI/Modal/Modal";
