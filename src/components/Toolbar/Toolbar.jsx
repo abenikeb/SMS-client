@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
 
 import "./Toolbar.css";
-const Toolbar = ({ user }) => {
+const Toolbar = (props) => {
   return (
     <header className="navbar Toolbar">
       <div className="menu">Menu</div>
       <Logo />
       <div className="DesktopOnly">
         <div className="flex items-center">
-          {user && (
+          {props.isAuth && (
             <button className=" flex-none btn btn-ghost btn-circle">
               <div className="indicator">
                 <svg
@@ -32,29 +32,33 @@ const Toolbar = ({ user }) => {
             </button>
           )}
 
-          <article>{user && <h3>{user.user_name}</h3>}</article>
-          {user && (
-            <section className="drop-downWrap">
-              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className="w-10 rounded-full">
-                  <img src="https://placeimg.com/80/80/people" />
-                </div>
-              </label>
+          {props.isAuth ? (
+            <div>
+              <h3>{props.user.user_name}</h3>
+              <section className="drop-downWrap">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div className="w-10 rounded-full">
+                    <img src="https://placeimg.com/80/80/people" />
+                  </div>
+                </label>
 
-              <div className="drop-downContent">
-                <ul>
-                  <li>
-                    <Link to="/">Profile</Link>
-                  </li>
-                  <li>
-                    <Link to="/">Settings</Link>
-                  </li>
-                  <li>
-                    <Link to="/logout">Logout</Link>
-                  </li>
-                </ul>
-              </div>
-            </section>
+                <div className="drop-downContent">
+                  <ul>
+                    <li>
+                      <Link to="/">Profile</Link>
+                    </li>
+                    <li>
+                      <Link to="/">Settings</Link>
+                    </li>
+                    <li>
+                      <Link to="/logout">Logout</Link>
+                    </li>
+                  </ul>
+                </div>
+              </section>
+            </div>
+          ) : (
+            <Link to="/login">Login</Link>
           )}
         </div>
       </div>

@@ -1,23 +1,17 @@
 import { Component } from "react";
 import { connect } from "react-redux";
+import withRouter from "../../hoc/WithRouter/WithRouter";
 import * as authActions from "../../store/action/index";
-import auth from "../../services/authService";
+import { Navigate } from "react-router-dom";
 
 class Logout extends Component {
   componentDidMount() {
-    auth.logout();
-    window.location = "/login";
+    this.props.onLogoutUser();
   }
   render() {
-    return null;
+    return <Navigate to="/login" />;
   }
 }
-
-const mapStateToProps = (state) => {
-  return {
-    data: state.auth.data,
-  };
-};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -27,4 +21,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Logout);
+export default connect(null, mapDispatchToProps)(withRouter(Logout));

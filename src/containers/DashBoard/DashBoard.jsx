@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
+import { connect } from "react-redux";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
+import { Navigate } from "react-router-dom";
 
 class DashBoard extends Component {
   state = {
@@ -41,13 +43,25 @@ class DashBoard extends Component {
   };
 
   render() {
+    let authNavigate = null;
+    if (!this.props.isAuthenticated) {
+      authNavigate = <Navigate to="/login" />;
+    }
+
     const { salesData, infoGraphicData } = this.state;
     return (
       <Auxiliary>
+        {authNavigate}
         <Dashboard salesData={salesData} infoGraphicData={infoGraphicData} />
       </Auxiliary>
     );
   }
 }
 
-export default withErrorHandler(DashBoard);
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.auth.token !== null,
+  };
+};
+
+export default connect(mapStateToProps)(withErrorHandler(DashBoard));

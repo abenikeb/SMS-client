@@ -1,7 +1,5 @@
 import axios from "axios";
 
-import { toast } from "react-toastify";
-
 // axios.interceptors.response.use(null, (error) => {
 //   const ExpectedError =
 //     error.response &&
@@ -30,5 +28,4 @@ export default {
   put: axios.put,
   delete: axios.delete,
   setJwt,
-  axios,
 };

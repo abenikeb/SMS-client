@@ -13,15 +13,8 @@ import ViewCustomer from "../../components/Customer/ViewCustomer";
 import Spinner from "../../components/UI/Spinner/Spinner";
 
 class Customer extends Form {
-  async componentDidMount() {
-    try {
-      this.props.onInitCustomers();
-    } catch (ex) {
-      if (ex.response && ex.response.status === 400) {
-        this.props.navigate("/");
-      }
-    }
-
+  componentDidMount() {
+    this.props.onInitCustomers();
     this.props.onInitCategories();
   }
 

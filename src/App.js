@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { connect } from "react-redux";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { far } from "@fortawesome/free-regular-svg-icons";
 import { fas } from "@fortawesome/free-solid-svg-icons";
+
+import * as actions from "./store/action/index";
 
 import Layout from "./hoc/Layout/Layout";
 import DashBoard from "./containers/DashBoard/DashBoard";
@@ -13,27 +16,19 @@ import Login from "./containers/Login/Login";
 import Register from "./containers/Register/Register";
 import "react-toastify/dist/ReactToastify.css";
 import Logout from "./containers/Logout/Logout";
-import auth from "./services/authService";
 import NotFound from "./containers/NotFound/NotFound";
 
 class App extends Component {
-  state = {
-    user: "",
-  };
-
-  async componentDidMount() {
-    let user = await auth.getUserData();
-    this.setState({ user });
+  componentDidMount() {
+    this.props.onTryToSignup();
   }
-
   render() {
     library.add(fas, far);
-    const { user } = this.state;
     return (
       <div>
         <ToastContainer />
 
-        <Layout user={this.state.user}>
+        <Layout>
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -51,4 +46,12 @@ class App extends Component {
   }
 }
 
-export default App;
+export const mapDispatchToProps = (dispatch) => {
+  return {
+    onTryToSignup: () => {
+      dispatch(actions.authCheckState());
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(App);

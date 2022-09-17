@@ -79,8 +79,12 @@ export const setCustomers = (customers) => {
 
 export const initCustomers = () => {
   return async (dispatch) => {
-    const { data: customers } = await getCustomers();
-    dispatch(setCustomers(customers));
+    try {
+      const { data: customers } = await getCustomers();
+      dispatch(setCustomers(customers));
+    } catch (ex) {
+      console.log("ERR-INIT-Customers", ex);
+    }
   };
 };
 
@@ -128,8 +132,13 @@ export const setPaymentType = (paymentType) => {
 
 export const initPaymentType = () => {
   return async (dispatch) => {
-    const { data: paymentType } = await getCustomerPaymentType();
-    dispatch(setPaymentType(paymentType));
+    try {
+      const { data: paymentType } = await getCustomerPaymentType();
+
+      dispatch(setPaymentType(paymentType));
+    } catch (ex) {
+      console.log("ERR-PAYMENT_INIT", ex);
+    }
   };
 };
 

@@ -5,13 +5,20 @@ const apiEndPoint = "http://localhost:5000/api";
 let apiURL = apiEndPoint + "/user";
 
 const token = "token";
+const expirationDate = "expirationDate";
+const user = "user";
 
 http.setJwt(localStorage.getItem(token));
 
 export const login = async (state) => {
   const { data: jwt } = await http.post(`${apiURL}/login`, state);
 
-  localStorage.setItem(token, jwt);
+  const expirationDates = new Date(new Date().getTime() + jwt.expiresIn * 1000);
+  const user_ = jwtDecode(jwt.token);
+
+  localStorage.setItem(token, jwt.token);
+  localStorage.setItem(expirationDate, expirationDates);
+  localStorage.setItem(user, user_.id);
 
   return jwt;
 };
@@ -22,6 +29,8 @@ export const loginWithJwt = async (jwt) => {
 
 export const logout = async () => {
   localStorage.removeItem(token);
+  localStorage.removeItem(expirationDate);
+  localStorage.removeItem(user);
 };
 
 export const getJwt = async () => {

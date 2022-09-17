@@ -10,6 +10,7 @@ import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 import Auxiliary from "../../../hoc/Auxiliary/Auxiliary";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import "./Profile.css";
+import withRouter from "../../../hoc/WithRouter/WithRouter";
 
 class Customer extends Form {
   schema = {
@@ -99,11 +100,11 @@ class Customer extends Form {
     return (
       <Auxiliary>
         <section className="container">
-          {/* {this.props.params.id === "new" ? (
+          {this.props.params.id === "new" ? (
             <h1>Add Customer</h1>
           ) : (
             <h1>Edit Customer</h1>
-          )} */}
+          )}
 
           {this.props.loading && <Spinner />}
           <form onSubmit={this.handleSubmit}>
@@ -181,4 +182,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withErrorHandler(Customer));
+)(withErrorHandler(withRouter(Customer)));

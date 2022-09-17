@@ -22,4 +22,5 @@ export {
   changeInputs,
   changeErrors,
   logoutUser,
+  authCheckState,
 } from "./authAction";

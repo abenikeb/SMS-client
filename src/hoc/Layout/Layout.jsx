@@ -10,17 +10,17 @@ const layout = (props) => {
   return (
     <Auxiliary>
       {/* <MenuToggle/> */}
-      <Toolbar user={props.user} />
-      {props.user && <SideNavigation />}
+      <Toolbar user={props.userData} isAuth={props.isAuthenticated} />
+      <SideNavigation isAuth={props.isAuthenticated} />
       <main className="content">{props.children}</main>
     </Auxiliary>
   );
 };
-// const mapStateToProps = (state) => {
-//   return {
-//     userData: state.auth.userData,
-//   };
-// };
+const mapStateToProps = (state) => {
+  return {
+    userData: state.auth.userData,
+    isAuthenticated: state.auth.token !== null,
+  };
+};
 
-// export default connect(mapStateToProps)(layout);
-export default layout;
+export default connect(mapStateToProps)(layout);

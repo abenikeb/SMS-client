@@ -5,9 +5,10 @@ const initialState = {
     tel: "",
     password: "",
   },
+  token: null,
   userData: null,
   error: {},
-  errors: {},
+  errors: null,
   loading: false,
 };
 
@@ -26,9 +27,10 @@ const reducer = (state = initialState, action) => {
         errors: action.error,
       };
 
-    case actionTypes.SUCCESS_SUBMIT_FORM:
+    case actionTypes.LOGIN_USER:
       return {
         ...state,
+        token: action.token,
         userData: action.user,
         loading: false,
       };
@@ -36,6 +38,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.INIT_LOGIN_USER:
       return {
         ...state,
+        errors: null,
         loading: true,
       };
 
@@ -50,6 +53,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         userData: null,
+        token: null,
       };
 
     default:
