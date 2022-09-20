@@ -1,22 +1,3 @@
 .aside {
   @apply navbar;
-  /* margin-right: 10px;
-  display: flex;
-  justify-content: center;
-  width: 15%;
-  height: 500px !important;
-  margin-left: 10px;
-  float: left;
-  background-color: rgb(255, 255, 255);
-  color: rgb(97, 96, 94);
-  font-weight: 300;
-  font-family: "Open Sans"; */
 }
-/* @media (max-width: 499px) {
-  .DesktopOnly {
-    display: none;
-  }
-  .menu {
-    display: inline;
-  }
-} */

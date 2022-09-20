@@ -19,6 +19,12 @@ import Logout from "./containers/Logout/Logout";
 import NotFound from "./containers/NotFound/NotFound";
 import Category from "./containers/Category/Category";
 import AddCategory from "./containers/Category/AddCategory/AddCategory";
+import Product from "./containers/Product/Product";
+import AddProduct from "./containers/Product/AddProduct/AddProduct";
+import AddPrice from "./containers/Price/AddPrice/AddPrice";
+import Price from "./containers/Price/Price";
+import Promotion from "./containers/Promotion/Promotion";
+import AddPromotion from "./containers/Promotion/AddPromotion/AddPromotion";
 
 class App extends Component {
   componentDidMount() {
@@ -40,9 +46,18 @@ class App extends Component {
 
             <Route path="/customers" element={<Customer />} />
             <Route path="/customer/:id" element={<Profile />} />
-
+            {/* CATEGORY */}
             <Route path="/view_category" element={<Category />} />
             <Route path="/add_category/:id" element={<AddCategory />} />
+            {/* PRODUCT */}
+            <Route path="/view_product" element={<Product />} />
+            <Route path="/add_product/:id" element={<AddProduct />} />
+            {/* PRICE */}
+            <Route path="/view_price" element={<Price />} />
+            <Route path="/add_price/:id" element={<AddPrice />} />
+            {/* PROMOTION */}
+            <Route path="/view_promotion" element={<Promotion />} />
+            <Route path="/add_promotion/:id" element={<AddPromotion />} />
 
             <Route path="/not-found" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/not-found" replace />} />

@@ -73,7 +73,7 @@ const NavigationItems = (props) => {
         {/* Product Section */}
         {props.isAuthenticated && (
           <NavigationItem
-            to="/add_product"
+            to="/add_product/new"
             label="Product"
             page="Add Product"
             img={home_black}
@@ -90,7 +90,7 @@ const NavigationItems = (props) => {
         {/* Promotion Section */}
         {props.isAuthenticated && (
           <NavigationItem
-            to="/add_promotion"
+            to="/add_promotion/new"
             label="Promotion"
             page="Add Promotion"
             img={home_black}
@@ -107,7 +107,7 @@ const NavigationItems = (props) => {
         {/* Price Section */}
         {props.isAuthenticated && (
           <NavigationItem
-            to="/add_price"
+            to="/add_price/new"
             label="Price"
             page="Add Price"
             img={home_black}

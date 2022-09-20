@@ -87,7 +87,7 @@ class Customer extends Form {
     return (
       <Auxiliary>
         {this.isUpdated()}
-        <section className="container">
+        <section className="container-profile">
           {this.props.params.id === "new" ? (
             <h1>Add Customer</h1>
           ) : (
@@ -96,7 +96,7 @@ class Customer extends Form {
 
           {this.props.loading && <Spinner />}
           <form onSubmit={this.handleSubmit}>
-            <section className="input-container">
+            <section className="input-container-profile">
               {this.renderInput("First Name", "first_name")}
               {this.renderInput("Last Name", "last_name")}
               {this.renderSelect(
@@ -115,7 +115,7 @@ class Customer extends Form {
               {this.renderInput("Plate no", "plate_no")}
               {this.renderSelect("Type id", "type_id", this.props.paymentType)}
             </section>
-            <section className="button-container">
+            <section className="button-container-profile">
               <button className="btn btn-sm" onClick={this.handleBackAction}>
                 Discard
               </button>

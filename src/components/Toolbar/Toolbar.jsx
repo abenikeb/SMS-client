@@ -33,8 +33,11 @@ const Toolbar = (props) => {
           )}
 
           {props.isAuth ? (
-            <div>
-              <h3>{props.user.user_name}</h3>
+            <div className="flex flex-row justify-center items-center">
+              <div className="flex flex-col justify-center items-center px-3">
+                <h3 className="mb-1">{props.user.user_name}</h3>
+                <p className="text-xs">Admin</p>
+              </div>
               <section className="drop-downWrap">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full">

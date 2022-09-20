@@ -11,9 +11,9 @@ import Auxiliary from "../../../hoc/Auxiliary/Auxiliary";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import withRouter from "../../../hoc/WithRouter/WithRouter";
 import { Navigate } from "react-router-dom";
-import "./AddCategory.css";
+import "./AddPromotion.css";
 
-class Customer extends Form {
+class AddPromotion extends Form {
   schema = {
     id: Joi.string(),
     name: Joi.string().required().label("Name"),
@@ -56,9 +56,9 @@ class Customer extends Form {
         {this.isUpdated()}
         <section className="container-add-product">
           {this.props.params.id === "new" ? (
-            <h1>Add Category</h1>
+            <h1>Add Promotion</h1>
           ) : (
-            <h1>Edit Category</h1>
+            <h1>Edit Promotion</h1>
           )}
 
           {this.props.loading && <Spinner />}
@@ -111,4 +111,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withErrorHandler(withRouter(Customer)));
+)(withErrorHandler(withRouter(AddPromotion)));

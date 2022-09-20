@@ -14,7 +14,7 @@ const LargeCard = ({ cardInfo }) => {
     chart = <Doughnut data={DoughuntData} />;
   }
   return (
-    <div className="card w-full shadow-md rounded-md p-4">
+    <div className="card w-full shadow-sm rounded-sm bg-gray-100 p-4">
       <h1 className="large-card-title">{cardInfo.title}</h1>
       <div className="card-body-wrap">
         <section>

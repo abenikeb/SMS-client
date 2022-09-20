@@ -1,5 +1,5 @@
 .card-container {
-  @apply card bg-base-100 shadow-md rounded-md;
+  @apply card bg-gray-100 shadow-sm rounded-md;
   width: 50px;
 }
 

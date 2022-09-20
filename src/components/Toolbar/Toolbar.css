@@ -1,16 +1,10 @@
 .Toolbar {
-  @apply bg-base-100 shadow-md pr-6;
-  /* height: 56px;
-  width: 100%;
+  @apply bg-gray-50 shadow-md pr-6;
   position: fixed;
   top: 0;
-  left: 0;
-  background-color: #703b09;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  box-sizing: border-box; */
+  left: 22%;
+  height: 5px;
+  width: 77%;
   z-index: 90;
 }
 

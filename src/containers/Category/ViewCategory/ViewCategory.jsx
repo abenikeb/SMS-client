@@ -56,7 +56,7 @@ class ViewCategory extends Component {
 
     return (
       <Auxiliary>
-        <div className="container">
+        <div className="container-category">
           <h1>User Category List</h1>
           <hr />
           <header>

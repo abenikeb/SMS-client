@@ -1,9 +1,9 @@
-.container {
-  @apply font-sans shadow-md;
+.container-list {
+  @apply font-sans shadow-md bg-gray-100;
   border-radius: 5px;
-  box-shadow: inset 15px #b4b4b8;
   width: 100%;
-  height: 500px;
+  height: 100%;
+  padding: 15px;
 }
 
 h1 {

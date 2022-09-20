@@ -4,26 +4,25 @@ h1 {
   margin-bottom: 15px;
 }
 
-.container {
-  @apply font-sans shadow-md;
+.container-profile {
+  @apply font-sans bg-gray-100;
   border-radius: 5px;
-  box-shadow: inset 15px #b4b4b8;
+  /* box-shadow: inset 15px #b4b4b8; */
   width: 100%;
-  min-height: 600px;
-  max-height: 1000px;
+  height: 90% !important;
   padding: 10px 70px;
 }
 
-.container .input-container {
+.container-profile .input-container-profile {
   display: grid;
   grid-template-columns: auto auto;
   width: 100%;
 }
 
-.container .button-container {
+.container-profile .button-container-profile {
   display: flex;
   margin-top: 30px;
-  float: right;
-  padding-right: 10%;
+  /* float: right; */
+  padding-left: 79%;
   gap: 10px;
 }

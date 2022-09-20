@@ -6,33 +6,25 @@ import Search from "../../../components/SearchBox/Search";
 import Pagination from "../../../components/UI/Pagination/Pagination";
 import Button from "../../../components/UI/Button/Button";
 import { Link } from "react-router-dom";
-import "./List.css";
+import "./ViewProduct.css";
 
-class List extends Component {
-  constructor(props) {
-    super(props);
-    this.buttonAction = React.createRef();
-  }
-
+class ViewProduct extends Component {
   columns = [
     {
       key: "select",
       content: (customer) => <input type="checkbox" className="checkbox" />,
     },
     {
-      path: "first_name",
-      label: "Name",
-      content: (customer) => (
-        <Link to={`customer/${customer.id}`}>{customer.first_name}</Link>
+      path: "name",
+      label: "CategoryName",
+      content: (category) => (
+        <Link to={`customer/${category.id}`}>{category.name}</Link>
       ),
     },
-    { path: "name", label: "Category" },
-    { path: "tel", label: "Tel" },
-    { path: "territory", label: "Teritory" },
-    { path: "city", label: "City" },
+    // { path: "name", label: "Category" },
     {
       key: "action",
-      content: (customer) => (
+      content: (category) => (
         <section className="drop-down-wrap">
           <button className="drop-down-btn">
             Action <FontAwesomeIcon icon="fa-solid fa-caret-down" />
@@ -42,13 +34,13 @@ class List extends Component {
               <li>
                 <Link
                   className="btn btn-sm btn-ghost"
-                  to={`/customer/${customer.id}`}
+                  to={`/add_category/${category.id}`}
                 >
                   Edit
                 </Link>
               </li>
               <li>
-                <button onClick={() => this.props.raiseProperty(customer)}>
+                <button onClick={() => this.props.raiseProperty(category)}>
                   View
                 </button>
               </li>
@@ -64,8 +56,8 @@ class List extends Component {
 
     return (
       <Auxiliary>
-        <div className="container-list">
-          <h1>User List</h1>
+        <div className="container-category">
+          <h1>Product List</h1>
           <hr />
           <header>
             <div>
@@ -75,10 +67,8 @@ class List extends Component {
               />
             </div>
             <div>
-              <Button label="Import Excel" btn_class="btn-success-ghost" />
-              <Button label="Export Excel" btn_class="btn-success-ghost" />
-              <Link to="/customer/new" className="btn btn-primary btn-sm">
-                Add Customer
+              <Link to="/add_category/new" className="btn btn-primary btn-sm">
+                Add Category
               </Link>
             </div>
           </header>
@@ -88,18 +78,16 @@ class List extends Component {
             sortColumns={this.props.sortColumns}
             onSort={this.props.onSort}
           />
-          <div className="mt-4">
-            <Pagination
-              currentPage={currentPage}
-              pageSize={pageSize}
-              itemsSize={itemsSize}
-              onPageChange={this.props.onHandlePageChange}
-            />
-          </div>
+          <Pagination
+            currentPage={currentPage}
+            pageSize={pageSize}
+            itemsSize={itemsSize}
+            onPageChange={this.props.onHandlePageChange}
+          />
         </div>
       </Auxiliary>
     );
   }
 }
 
-export default List;
+export default ViewProduct;
