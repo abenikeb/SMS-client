@@ -3,6 +3,7 @@ import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
 import Select from "../UI/Select/Select";
 import Joi from "joi-browser";
+import TextArea from "../UI/TextArea/TextArea";
 
 class Form extends Component {
   validateInput = (target) => {
@@ -56,6 +57,19 @@ class Form extends Component {
     const { data, error } = this.props;
     return (
       <Input
+        label={label}
+        name={name}
+        value={data[name]}
+        onChange={this.handleChange}
+        error={error[name]}
+      />
+    );
+  };
+
+  renderTextArea = (label, name) => {
+    const { data, error } = this.props;
+    return (
+      <TextArea
         label={label}
         name={name}
         value={data[name]}

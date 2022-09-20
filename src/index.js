@@ -7,6 +7,7 @@ import thunk from "redux-thunk";
 
 import customerReducer from "./store/reducer/customerReducer";
 import authReducer from "./store/reducer/authReducer";
+import categoryReducer from "./store/reducer/categoryReducer";
 
 import "./index.css";
 import App from "./App";
@@ -15,6 +16,7 @@ import reportWebVitals from "./reportWebVitals";
 const reducer = {
   customers: customerReducer,
   auth: authReducer,
+  categories: categoryReducer,
 };
 
 const store = configureStore({

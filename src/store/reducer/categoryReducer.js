@@ -2,62 +2,51 @@ import * as actionTypes from "../action/actionTypes";
 
 const initialState = {
   data: {
-    first_name: "",
-    last_name: "",
-    category_id: "",
-    business_licenses_no: "",
-    plate_no: "",
-    type_id: "",
-    tel: "",
-    city: "",
-    email: "",
-    territory: "",
+    name: "",
+    _desc: "",
   },
   error: {},
   errors: {},
-  customers: [],
   categories: [],
-  paymentType: [],
-  customer: null,
   loading: false,
   property: null,
   currentPage: 1,
   pageSize: 5,
   searchQuery: "",
   viewModal: false,
-  isCustomerUpdate: false,
+  isCategoryUpdate: false,
   sortColumn: { path: "name", order: "acs" },
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.CHANGE_INPUT:
+    case actionTypes.CHANGE_CATEGORY_INPUT:
       return {
         ...state,
         data: action.data,
         error: action.error,
       };
 
-    case actionTypes.CHANGE_ERROR:
+    case actionTypes.CHANGE_CATEGORY_ERROR:
       return {
         ...state,
         error: action.error,
       };
 
-    case actionTypes.INIT_SUBMIT_FORM:
+    case actionTypes.INIT_SUBMIT_CATEGORY_FORM:
       return {
         ...state,
         loading: true,
       };
 
-    case actionTypes.FAIL_SUBMIT_FORM:
+    case actionTypes.FAIL_SUBMIT_CATEGORY_FORM:
       return {
         ...state,
         errors: action.errors,
         loading: false,
       };
 
-    case actionTypes.SUBMIT_VALIDATION_ERROR:
+    case actionTypes.SUBMIT_CATEGORY_VALIDATION_ERROR:
       let error = { ...state.error };
       action.ex.response.data.map((res) => {
         let keyIndex = Object.keys(res.err)[0];
@@ -70,84 +59,64 @@ const reducer = (state = initialState, action) => {
         loading: false,
       };
 
-    case actionTypes.SUCCESS_SUBMIT_FORM:
+    case actionTypes.SUCCESS_SUBMIT_CATEGORY_FORM:
       return {
         ...state,
-        customers: state.customers.concat(action.data),
-        isCustomerUpdate: true,
+        categories: state.categories.concat(action.data),
+        isCategoryUpdate: true,
         loading: false,
-      };
-
-    case actionTypes.INIT_CUSTOMERS:
-      return {
-        ...state,
-        customers: action.customers,
-        isCustomerUpdate: false,
       };
 
     case actionTypes.INIT_CATEGORIES:
       return {
         ...state,
         categories: action.categories,
+        isCategoryUpdate: false,
       };
 
-    case actionTypes.FETCH_CUSTOMER:
+    case actionTypes.GET_CATEGORY:
       return {
         ...state,
         data: {
-          id: action.customer.id,
-          first_name: action.customer.first_name,
-          last_name: action.customer.last_name,
-          category_id: action.customer.category_id,
-          business_licenses_no: action.customer.business_licenses_no,
-          plate_no: action.customer.plate_no,
-          type_id: action.customer.type_id,
-          tel: action.customer.tel,
-          city: action.customer.city,
-          email: action.customer.email,
-          territory: action.customer.territory,
+          id: action.category.id,
+          name: action.category.name,
+          _desc: action.category._desc,
         },
       };
 
-    case actionTypes.INIT_PAYMENT:
-      return {
-        ...state,
-        paymentType: action.paymentType,
-      };
-
-    case actionTypes.CHANGE_PAGE:
+    case actionTypes.CHANGE_CATEGORY_PAGE:
       return {
         ...state,
         currentPage: action.item,
       };
 
-    case actionTypes.SORT_COLUMN:
+    case actionTypes.SORT_CATEGORY_COLUMN:
       return {
         ...state,
         sortColumn: action.column,
       };
 
-    case actionTypes.OPEN_MODAL:
+    case actionTypes.OPEN_CATEGORY_MODAL:
       return {
         ...state,
         viewModal: true,
       };
 
-    case actionTypes.CLOSE_MODAL:
+    case actionTypes.CLOSE_CATEGORY_MODAL:
       return {
         ...state,
         viewModal: false,
         property: null,
       };
 
-    case actionTypes.SET_PROPERTY:
+    case actionTypes.SET_CATEGORY_PROPERTY:
       return {
         ...state,
         property: action.item,
         viewModal: true,
       };
 
-    case actionTypes.SEARCH_QUERY:
+    case actionTypes.SEARCH_CATEGORY_QUERY:
       return {
         ...state,
         searchQuery: action.value,

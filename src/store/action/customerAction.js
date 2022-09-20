@@ -6,7 +6,6 @@ import {
   getCustomerPaymentType,
   saveCustomer,
 } from "../../services/customerServices";
-import { toast } from "react-toastify";
 
 export const initSubmitForm = () => {
   return {
@@ -48,8 +47,6 @@ export const succesSubmitForm = (data) => {
         dispatch(failSubmitForm(ex.response.data.message));
       } else if (ex.response && ex.response.status === 404) {
         dispatch(failSubmitForm(ex.response.data.message));
-        // toast.error(ex.response.data.message);
-        // this.props.navigate("/not-found");
       }
     }
   };
@@ -81,6 +78,7 @@ export const initCustomers = () => {
   return async (dispatch) => {
     try {
       const { data: customers } = await getCustomers();
+      console.log("GET-CUSTOMERS", customers);
       dispatch(setCustomers(customers));
     } catch (ex) {
       console.log("ERR-INIT-Customers", ex);
@@ -115,10 +113,7 @@ export const initCategories = () => {
       const { data: categories } = await getCategories();
       dispatch(setCategories(categories));
     } catch (ex) {
-      if (ex.response && ex.response.status === 400) {
-        toast.error(ex.response.data);
-        // this.props.navigate("/");
-      }
+      console.log("getCategories-Err", ex);
     }
   };
 };

@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import * as authAction from "../../store/action/index";
 import { Navigate } from "react-router-dom";
 
+import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import Form from "../../components/Form/Form";
 import WithRouter from "../../hoc/WithRouter/WithRouter";
 import Spinner from "../../components/UI/Spinner/Spinner";
@@ -80,4 +81,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(WithRouter(Login));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WithRouter(withErrorHandler(Login)));

@@ -58,7 +58,7 @@ const Toolbar = (props) => {
               </section>
             </div>
           ) : (
-            <Link to="/login">Login</Link>
+            <Link to="/login">Authenticate</Link>
           )}
         </div>
       </div>

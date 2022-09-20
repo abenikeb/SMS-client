@@ -11,6 +11,7 @@ import Auxiliary from "../../../hoc/Auxiliary/Auxiliary";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import "./Profile.css";
 import withRouter from "../../../hoc/WithRouter/WithRouter";
+import { Navigate } from "react-router-dom";
 
 class Customer extends Form {
   schema = {
@@ -35,40 +36,16 @@ class Customer extends Form {
     if (customerId === "new") return;
 
     this.props.onFetchCustomer(customerId);
-    // try {
-
-    // } catch (ex) {
-    //   if (ex.response && ex.response.status === 404) {
-    //     toast.error(ex.response.data.error);
-    //     this.props.navigate("/not-found");
-    //   }
-    // }
   };
 
   populateCategories = async () => {
     console.log("POPULATE_CATEGORY");
     this.props.onInitCategories();
-    // try {
-
-    // } catch (ex) {
-    //   if (ex.response && ex.response.status === 400) {
-    //     toast.error(ex.response.data.error);
-    //     this.props.navigate("/");
-    //   }
-    // }
   };
 
   populateCustomerType = async () => {
     console.log("POPULATE_CUSTOMER_TYPE");
     this.props.onInitPaymentType();
-    // try {
-
-    // } catch (ex) {
-    //   if (ex.response && ex.response.status === 400) {
-    //     toast.error(ex.response.data.error);
-    //     this.props.navigate("/");
-    //   }
-    // }
   };
 
   async componentDidMount() {
@@ -91,14 +68,25 @@ class Customer extends Form {
   };
 
   doSubmit = async () => {
-    console.log("doSubmit");
     this.props.onSubmitForm(this.props.data);
   };
+
+  isUpdated() {
+    let customerUpdateRedirect = null;
+
+    if (this.props.isCustomerUpdate) {
+      toast.info("Successfuly Updated");
+      customerUpdateRedirect = <Navigate to="/customers" />;
+    }
+
+    return customerUpdateRedirect;
+  }
 
   render() {
     console.log("RENDER -");
     return (
       <Auxiliary>
+        {this.isUpdated()}
         <section className="container">
           {this.props.params.id === "new" ? (
             <h1>Add Customer</h1>
@@ -150,6 +138,7 @@ const mapStateToProps = (state) => {
     loading: state.customers.loading,
     error: state.customers.error,
     errors: state.customers.errors,
+    isCustomerUpdate: state.customers.isCustomerUpdate,
   };
 };
 

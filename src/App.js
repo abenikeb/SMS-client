@@ -17,6 +17,8 @@ import Register from "./containers/Register/Register";
 import "react-toastify/dist/ReactToastify.css";
 import Logout from "./containers/Logout/Logout";
 import NotFound from "./containers/NotFound/NotFound";
+import Category from "./containers/Category/Category";
+import AddCategory from "./containers/Category/AddCategory/AddCategory";
 
 class App extends Component {
   componentDidMount() {
@@ -35,8 +37,13 @@ class App extends Component {
             <Route path="/logout" element={<Logout />} />
             {/* <Navigate to="/login" replace /> */}
             <Route path="/" element={<DashBoard />} />
+
             <Route path="/customers" element={<Customer />} />
             <Route path="/customer/:id" element={<Profile />} />
+
+            <Route path="/view_category" element={<Category />} />
+            <Route path="/add_category/:id" element={<AddCategory />} />
+
             <Route path="/not-found" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/not-found" replace />} />
           </Routes>

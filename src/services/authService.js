@@ -20,6 +20,8 @@ export const login = async (state) => {
   localStorage.setItem(expirationDate, expirationDates);
   localStorage.setItem(user, user_.id);
 
+  http.setJwt(localStorage.getItem(token));
+
   return jwt;
 };
 

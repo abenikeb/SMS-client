@@ -14,14 +14,14 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.CHANGE_INPUT:
+    case actionTypes.CHANGE_INPUTS:
       return {
         ...state,
         data: action.data,
         error: action.error,
       };
 
-    case actionTypes.CHANGE_ERROR:
+    case actionTypes.CHANGE_ERRORS:
       return {
         ...state,
         errors: action.error,
@@ -43,9 +43,11 @@ const reducer = (state = initialState, action) => {
       };
 
     case actionTypes.FAIL_LOGIN_USER:
+      let error = { ...state.error };
+      error.tel = action.err;
       return {
         ...state,
-        errors: action.errors,
+        error: error,
         loading: false,
       };
 

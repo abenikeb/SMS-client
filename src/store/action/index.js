@@ -1,4 +1,6 @@
 export {
+  changeInput,
+  changeError,
   initCustomers,
   initCategories,
   changePage,
@@ -9,18 +11,30 @@ export {
   searchQuery,
   fetchCustomer,
   initPaymentType,
-  changeInput,
-  changeError,
   succesSubmitForm,
   failSubmitForm,
   initSubmitForm,
 } from "./customerAction";
 
 export {
-  loginUser,
-  setUserDate,
   changeInputs,
   changeErrors,
+  loginUser,
+  setUserDate,
   logoutUser,
   authCheckState,
 } from "./authAction";
+
+export {
+  inputChange_category,
+  inputError_category,
+  succesSubmitCategoryForm,
+  initUserCategories,
+  getUserCategory,
+  changePage_category,
+  sortColumn_category,
+  openModal_category,
+  closeModal_category,
+  setProperty_category,
+  searchQuery_category,
+} from "./categoryAction";

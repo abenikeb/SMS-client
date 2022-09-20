@@ -8,6 +8,7 @@ const NavigationItems = (props) => {
   return (
     <div>
       <ul className="NavigationItems">
+        {/* Dashboard Section */}
         {props.isAuthenticated && (
           <NavigationItem
             to="/"
@@ -17,6 +18,8 @@ const NavigationItems = (props) => {
             exact
           />
         )}
+
+        {/* Customer Section */}
         {props.isAuthenticated && (
           <NavigationItem
             to="/customer/new"
@@ -32,10 +35,29 @@ const NavigationItems = (props) => {
             img={dashboard_icon}
           />
         )}
+
+        {/* Sales Section */}
         {props.isAuthenticated && (
           <NavigationItem
-            to="/add_category"
-            label="Category"
+            to="/add_order"
+            label="Sales"
+            page="View Oder"
+            img={home_black}
+          />
+        )}
+        {props.isAuthenticated && (
+          <NavigationItem
+            to="/view_order"
+            page="Create Order"
+            img={home_black}
+          />
+        )}
+
+        {/* Customer Category Section */}
+        {props.isAuthenticated && (
+          <NavigationItem
+            to="/add_category/new"
+            label="Customer Category"
             page="Add Category"
             img={home_black}
           />
@@ -44,7 +66,58 @@ const NavigationItems = (props) => {
           <NavigationItem
             to="/view_category"
             page="View Category"
+            img={dashboard_icon}
+          />
+        )}
+
+        {/* Product Section */}
+        {props.isAuthenticated && (
+          <NavigationItem
+            to="/add_product"
+            label="Product"
+            page="Add Product"
             img={home_black}
+          />
+        )}
+        {props.isAuthenticated && (
+          <NavigationItem
+            to="/view_product"
+            page="View Product"
+            img={dashboard_icon}
+          />
+        )}
+
+        {/* Promotion Section */}
+        {props.isAuthenticated && (
+          <NavigationItem
+            to="/add_promotion"
+            label="Promotion"
+            page="Add Promotion"
+            img={home_black}
+          />
+        )}
+        {props.isAuthenticated && (
+          <NavigationItem
+            to="/view_promotion"
+            page="View Promotion"
+            img={dashboard_icon}
+          />
+        )}
+
+        {/* Price Section */}
+        {props.isAuthenticated && (
+          <NavigationItem
+            to="/add_price"
+            label="Price"
+            page="Add Price"
+            img={home_black}
+          />
+        )}
+        {props.isAuthenticated && (
+          <NavigationItem
+            to="/view_price"
+            page="View Price"
+            img={dashboard_icon}
           />
         )}
       </ul>
