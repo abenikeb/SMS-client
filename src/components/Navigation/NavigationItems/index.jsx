@@ -39,18 +39,14 @@ const NavigationItems = (props) => {
         {/* Sales Section */}
         {props.isAuthenticated && (
           <NavigationItem
-            to="/add_order"
+            to="/add_order/new"
             label="Sales"
-            page="View Oder"
+            page="Create Oder"
             img={home_black}
           />
         )}
         {props.isAuthenticated && (
-          <NavigationItem
-            to="/view_order"
-            page="Create Order"
-            img={home_black}
-          />
+          <NavigationItem to="/view_order" page="View Order" img={home_black} />
         )}
 
         {/* Customer Category Section */}

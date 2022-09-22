@@ -25,6 +25,8 @@ import AddPrice from "./containers/Price/AddPrice/AddPrice";
 import Price from "./containers/Price/Price";
 import Promotion from "./containers/Promotion/Promotion";
 import AddPromotion from "./containers/Promotion/AddPromotion/AddPromotion";
+import Order from "./containers/Order/Order";
+import AddOrder from "./containers/Order/AddOrder/AddOrder";
 
 class App extends Component {
   componentDidMount() {
@@ -46,6 +48,9 @@ class App extends Component {
 
             <Route path="/customers" element={<Customer />} />
             <Route path="/customer/:id" element={<Profile />} />
+            {/* ORDER */}
+            <Route path="/view_order" element={<Order />} />
+            <Route path="/add_order/:id" element={<AddOrder />} />
             {/* CATEGORY */}
             <Route path="/view_category" element={<Category />} />
             <Route path="/add_category/:id" element={<AddCategory />} />

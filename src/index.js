@@ -8,6 +8,7 @@ import thunk from "redux-thunk";
 import customerReducer from "./store/reducer/customerReducer";
 import authReducer from "./store/reducer/authReducer";
 import categoryReducer from "./store/reducer/categoryReducer";
+import orderReducer from "./store/reducer/orderReducer";
 
 import "./index.css";
 import App from "./App";
@@ -17,6 +18,7 @@ const reducer = {
   customers: customerReducer,
   auth: authReducer,
   categories: categoryReducer,
+  order: orderReducer,
 };
 
 const store = configureStore({

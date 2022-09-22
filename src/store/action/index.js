@@ -38,3 +38,12 @@ export {
   setProperty_category,
   searchQuery_category,
 } from "./categoryAction";
+
+export {
+  initCategories_order,
+  changeInput_order,
+  changeError_order,
+  initCustomers_order,
+  initProductWithPrice,
+  changeInput_order_items,
+} from "./orderAction";

@@ -6,7 +6,7 @@ import Search from "../../../components/SearchBox/Search";
 import Pagination from "../../../components/UI/Pagination/Pagination";
 import Button from "../../../components/UI/Button/Button";
 import { Link } from "react-router-dom";
-import "./ViewPromotion.css";
+import "./ViewPromotion";
 
 class ViewPromotion extends Component {
   columns = [

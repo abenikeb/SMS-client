@@ -1,0 +1,43 @@
+h1 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.container-profile {
+  @apply font-sans bg-gray-100;
+  border-radius: 5px;
+  /* box-shadow: inset 15px #b4b4b8; */
+  width: 100%;
+  height: 90% !important;
+  padding: 10px 70px;
+}
+
+.container-profile .input-container-profile {
+  display: grid;
+  grid-template-columns: auto auto;
+  width: 100%;
+}
+
+.container-profile .button-container-profile {
+  display: flex;
+  margin-top: 30px;
+  /* float: right; */
+  padding-left: 79%;
+  gap: 10px;
+}
+
+.table-warap {
+  @apply table;
+  width: 75% !important;
+  height: auto;
+}
+
+.price-container {
+  @apply rounded-md bg-gray-300 flex flex-col py-5 gap-y-2;
+  width: 100%;
+}
+
+.price-container .price-wrap {
+  @apply flex justify-between px-3;
+}
