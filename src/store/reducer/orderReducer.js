@@ -38,6 +38,12 @@ const reducer = (state = initialState, action) => {
         error: action.error,
       };
 
+    case actionTypes.CHANGE_ERROR_FOR_ORDER:
+      return {
+        ...state,
+        error: action.error,
+      };
+
     case actionTypes.INPUT_CHANGE_FOR_ORDER_ITEMS:
       return produce(state, (draftState) => {
         draftState.data.items[action.textInput].qty = action.data;
@@ -56,6 +62,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         categories: action.categories,
+        isOrderUpdate: false,
       };
 
     case actionTypes.SET_PRODUCT_PRICE_FOR_ORDER:
@@ -68,6 +75,7 @@ const reducer = (state = initialState, action) => {
             return {
               product_id: pro.id,
               product_sku: pro.product_sku,
+              qty_promotion: 0,
               price: pro.price,
               qty_promotion: 0,
               qty: 0,
@@ -99,6 +107,8 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         orders: state.orders.concat(action.data),
+        isOrderUpdate: true,
+        loading: false,
       };
 
     case actionTypes.FAIL_SUBMIT_FORM_ORDER:
@@ -106,30 +116,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         errors: action.errors,
       };
-
-    // case actionTypes.FETCH_CUSTOMER:
-    //   return {
-    //     ...state,
-    //     data: {
-    //       id: action.customer.id,
-    //       first_name: action.customer.first_name,
-    //       last_name: action.customer.last_name,
-    //       category_id: action.customer.category_id,
-    //       business_licenses_no: action.customer.business_licenses_no,
-    //       plate_no: action.customer.plate_no,
-    //       type_id: action.customer.type_id,
-    //       tel: action.customer.tel,
-    //       city: action.customer.city,
-    //       email: action.customer.email,
-    //       territory: action.customer.territory,
-    //     },
-    //   };
-
-    // case actionTypes.INIT_PAYMENT:
-    //   return {
-    //     ...state,
-    //     paymentType: action.paymentType,
-    //   };
 
     // case actionTypes.CHANGE_PAGE:
     //   return {

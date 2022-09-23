@@ -1,35 +1,24 @@
-import React from "react";
+import React, { Component } from "react";
 import Joi from "joi-browser";
 import { toast } from "react-toastify";
 import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 import * as actionTypes from "../../../store/action/index";
-import Form from "../../../components/Form/Form";
 
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 import withRouter from "../../../hoc/WithRouter/WithRouter";
 import Auxiliary from "../../../hoc/Auxiliary/Auxiliary";
+import Button from "../../../components/UI/Button/Button";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import "./AddOrder.css";
 
-class AddOrder extends Form {
-  constructor(props) {
-    super(props);
-    this.textInput = React.createRef();
-  }
-
+class AddOrder extends Component {
   schema = {
     id: Joi.string(),
     category_id: Joi.required().label("Category"),
     customer_id: Joi.required().label("Customer"),
-  };
-
-  populateCustomer = async () => {
-    let customerId = this.props.params.id;
-    if (customerId === "new") return;
-
-    this.props.onFetchCustomer(customerId);
+    items: Joi.array(),
   };
 
   populateCategories = async () => {
@@ -41,7 +30,7 @@ class AddOrder extends Form {
     await this.populateCustomer();
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     if (prevProps.data.category_id !== this.props.data.category_id) {
       if (this.props.data.category_id !== "") {
         this.props.onInitCustomers(this.props.data.category_id);
@@ -57,6 +46,66 @@ class AddOrder extends Form {
     }
   }
 
+  populateCustomer = async () => {
+    let customerId = this.props.params.id;
+    if (customerId === "new") return;
+    this.props.onFetchCustomer(customerId);
+  };
+
+  validateInput = (target) => {
+    let err = Joi.validate(
+      { [target.name]: target.value },
+      { [target.name]: this.schema[target.name] }
+    );
+    return err;
+  };
+
+  handleChange = ({ target }) => {
+    let inputErr = this.validateInput(target);
+    let errors = { ...this.props.error };
+    inputErr.error !== null
+      ? (errors[target.name] = inputErr.error.details[0].message)
+      : delete errors[target.name];
+
+    const data = { ...this.props.data };
+    data[target.name] = target.value;
+
+    this.props.onHandleInputChange(data, errors);
+  };
+
+  validate = () => {
+    const options = { abortEarly: false };
+    const { error } = Joi.validate(this.props.data, this.schema, options);
+    return error != null ? error : {};
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+    let errors = {};
+    const error = this.validate();
+    const errCount = Object.keys(error).length;
+
+    if (errCount > 0) {
+      for (let err of error.details) {
+        errors[err.path[0]] = err.message;
+      }
+    }
+
+    this.props.onHandleSubmitError(errors);
+    if (errCount > 0) return false;
+
+    this.doSubmit();
+  };
+
+  renderButton = (label, btn_class) => {
+    return (
+      <div>
+        <Button label={label} btn_class={btn_class} />
+      </div>
+    );
+  };
+
   handleBackAction = () => {
     this.props.navigate("/customers");
   };
@@ -67,21 +116,20 @@ class AddOrder extends Form {
   };
 
   doSubmit = async () => {
-    console.log("data", this.props.data);
-    // this.props.onSubmitForm(this.props.data);
+    this.props.onSubmitForm(this.props.data);
   };
 
   isUpdated() {
     let customerUpdateRedirect = null;
 
-    if (this.props.isCustomerUpdate) {
+    if (this.props.isOrderUpdate) {
       toast.info("Successfuly Updated");
-      customerUpdateRedirect = <Navigate to="/customers" />;
+      customerUpdateRedirect = <Navigate to="/view_order" />;
     }
 
     return customerUpdateRedirect;
   }
-  // initCustomers_order;
+
   render() {
     return (
       <Auxiliary>
@@ -97,28 +145,67 @@ class AddOrder extends Form {
           {this.props.loading && <Spinner />}
 
           <form onSubmit={this.handleSubmit}>
-            <section className="input-container-profile">
-              {this.renderSelect(
-                "Category",
-                "category_id",
-                this.props.categories
-              )}
+            <div className="flex flex-wrap gap-8">
+              <div className="form-control-wrap">
+                <label className="label">
+                  <span className="label-text">Category</span>
+                </label>
+                <select
+                  className="input-style-wrap"
+                  required
+                  name="category_id"
+                  value={this.props.data.category_id}
+                  onChange={this.handleChange}
+                >
+                  <option selected>Pick Customer Category</option>
+                  {this.props.categories.map((option) => (
+                    <option key={option.id} value={option.id}>
+                      {option.name}
+                    </option>
+                  ))}
+                </select>
+                <label className="label">
+                  {this.props.error?.category_id && (
+                    <span className="label-text bg-red-400 text-white rounded-md h-8 flex justify-center items-center">
+                      {this.props.error.category_id}
+                    </span>
+                  )}
+                </label>
+              </div>
 
-              {/* {this.renderInput("Last Name", "last_name")} */}
+              <div className="form-control-wrap">
+                <label className="label">
+                  <span className="label-text">Customer</span>
+                </label>
+                <select
+                  className="input-style-wrap"
+                  required
+                  name="customer_id"
+                  value={this.props.data.customer_id}
+                  onChange={this.handleChange}
+                >
+                  <option selected>Pick Customer</option>
+                  {this.props.customers.map((option) => (
+                    <option key={option.id} value={option.id}>
+                      {option.name}
+                    </option>
+                  ))}
+                </select>
+                <label className="label">
+                  {this.props.error?.customer_id && (
+                    <span className="label-text bg-red-400 text-white rounded-md w-full h-8 flex justify-center items-center">
+                      {this.props.error.customer_id}
+                    </span>
+                  )}
+                </label>
+              </div>
+            </div>
 
-              {this.renderSelect(
-                "Customer",
-                "customer_id",
-                this.props.customers
-              )}
+            <br />
+            <br />
 
-              {/* {this.renderSelect(
-                "Category",
-                "category_id",
-                this.props.categories
-              )} */}
-
-              <div className="overflow-x-auto">
+            <div className="flex flex-wrap gap-8">
+              <div className="overflow-x-auto flex-1">
                 <table className="table-warap">
                   <thead>
                     <tr>
@@ -194,7 +281,7 @@ class AddOrder extends Form {
                 </table>
               </div>
 
-              <div className="price-container">
+              <div className="price-container flex-1 border-dashed border-2 border-gray-500">
                 <div className="price-wrap">
                   <p>Net Price</p>
                   <h6>
@@ -221,7 +308,9 @@ class AddOrder extends Form {
                   </h6>
                 </div>
               </div>
-            </section>
+            </div>
+
+            {/* BUTTON CLASSES */}
             <section className="button-container-profile">
               <button className="btn btn-sm" onClick={this.handleBackAction}>
                 Discard
@@ -229,6 +318,20 @@ class AddOrder extends Form {
               {this.renderButton("Submit", "btn-primary-wrap")}
             </section>
           </form>
+
+          {/* <div className="dropdown-wr">
+            <label tabIndex={0} className="btn m-1">
+              Click
+            </label>
+            <ul tabIndex={0} className="dropdown-content dropdown-wrap-display">
+              <li>
+                <a>Item 1</a>
+              </li>
+              <li>
+                <a>Item 2</a>
+              </li>
+            </ul>
+          </div> */}
         </section>
       </Auxiliary>
     );
@@ -252,7 +355,7 @@ const mapStateToProps = (state) => {
     loading: state.order.loading,
     error: state.order.error,
     errors: state.order.errors,
-    isCustomerUpdate: state.order.isCustomerUpdate,
+    isOrderUpdate: state.order.isCustomerUpdate,
   };
 };
 

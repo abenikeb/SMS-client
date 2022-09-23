@@ -39,22 +39,22 @@ export const failSubmitForm = (errors) => {
 
 export const succesSubmitForm_order = (data) => {
   console.log("data", data);
-  // return async (dispatch) => {
-  //   dispatch(initSubmitForm());
-  //   try {
-  //     const { data: order } = await createOrder(data);
-  //     dispatch(setForm(order));
-  //   } catch (ex) {
-  //     if (ex.response && ex.response.status === 400) {
-  //       // dispatch(submitFormValidationError(ex));
-  //       dispatch(failSubmitForm(ex.response.data.message));
-  //     } else if (ex.response && ex.response.status === 401) {
-  //       dispatch(failSubmitForm(ex.response.data.message));
-  //     } else if (ex.response && ex.response.status === 404) {
-  //       dispatch(failSubmitForm(ex.response.data.message));
-  //     }
-  //   }
-  // };
+  return async (dispatch) => {
+    dispatch(initSubmitForm());
+    try {
+      const { data: order } = await createOrder(data);
+      dispatch(setForm(order));
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        // dispatch(submitFormValidationError(ex));
+        dispatch(failSubmitForm(ex.response.data.message));
+      } else if (ex.response && ex.response.status === 401) {
+        dispatch(failSubmitForm(ex.response.data.message));
+      } else if (ex.response && ex.response.status === 404) {
+        dispatch(failSubmitForm(ex.response.data.message));
+      }
+    }
+  };
 };
 
 export const changeInput_order_items = (data, PLACE_HOLEDR_VALUE) => {
@@ -74,7 +74,6 @@ export const changeInput_order = (data, errors) => {
 };
 
 export const changeError_order = (error) => {
-  console.log("error", error);
   return {
     type: actionTypes.CHANGE_ERROR_FOR_ORDER,
     error: error,
