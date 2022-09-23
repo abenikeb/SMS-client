@@ -48,25 +48,27 @@ class AddOrder extends Form {
         this.props.onInitProductWithPrice(this.props.data.category_id);
       }
     }
+    if (
+      prevProps.data.items[0]?.qty !== this.props.data.items[0]?.qty ||
+      prevProps.data.items[1]?.qty !== this.props.data.items[1]?.qty ||
+      prevProps.data.items[2]?.qty !== this.props.data.items[2]?.qty
+    ) {
+      this.props.calculateTotal(this.props.data.items);
+    }
   }
-
-  // mapCategoryToCustomers = (customers) => {
-  //   this.props.onInitCustomers(customers);
-  // };
 
   handleBackAction = () => {
     this.props.navigate("/customers");
   };
 
   handleQtyChange = (e) => {
-    console.log("Target", e);
-    // console.log("textInput", this.textInput);
-
-    this.props.onHandleInputChange_items(e.target.value);
+    const PLACE_HOLEDR_VALUE = e.target.attributes[1].value;
+    this.props.onHandleInputChange_items(e.target.value, PLACE_HOLEDR_VALUE);
   };
 
   doSubmit = async () => {
-    this.props.onSubmitForm(this.props.data);
+    console.log("data", this.props.data);
+    // this.props.onSubmitForm(this.props.data);
   };
 
   isUpdated() {
@@ -127,43 +129,96 @@ class AddOrder extends Form {
                     </tr>
                   </thead>
                   <tbody>
-                    {this.props.data.items.map((prod, index) => (
+                    {this.props.data.items.length === 0 && (
+                      <div className="p-4">
+                        <p>No Items Found</p>
+                        <h6>PLease select the category lists</h6>
+                      </div>
+                    )}
+
+                    {this.props.data.items[0] && (
                       <tr>
-                        <th>{prod.product_sku}</th>
-                        <td>{prod.price}</td>
+                        <th>{this.props.data.items[0]?.product_sku}</th>
+                        <td>{this.props.data.items[0]?.price}</td>
                         <td>
                           <input
-                            type="text"
+                            type="number"
+                            autoFocus
                             ref={this.textInput}
-                            placeholder="Type here"
-                            value={prod.qty}
+                            placeholder="0"
+                            value={this.props.data.items[0]?.qty}
                             onChange={this.handleQtyChange}
                             className="input input-ghost w-full max-w-xs"
                           />
                         </td>
                         <td>Total</td>
                       </tr>
-                    ))}
+                    )}
+
+                    {this.props.data.items[1] && (
+                      <tr>
+                        <th>{this.props.data.items[1]?.product_sku}</th>
+                        <td>{this.props.data.items[1]?.price}</td>
+                        <td>
+                          <input
+                            type="number"
+                            ref={this.textInput}
+                            placeholder="1"
+                            value={this.props.data.items[1]?.qty}
+                            onChange={this.handleQtyChange}
+                            className="input input-ghost w-full max-w-xs"
+                          />
+                        </td>
+                        <td>Total</td>
+                      </tr>
+                    )}
+
+                    {this.props.data.items[2] && (
+                      <tr>
+                        <th>{this.props.data.items[2]?.product_sku}</th>
+                        <td>{this.props.data.items[2]?.price}</td>
+                        <td>
+                          <input
+                            type="number"
+                            ref={this.textInput}
+                            placeholder="2"
+                            value={this.props.data.items[2]?.qty}
+                            onChange={this.handleQtyChange}
+                            className="input input-ghost w-full max-w-xs"
+                          />
+                        </td>
+                        <td>Total</td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
 
               <div className="price-container">
                 <div className="price-wrap">
-                  <p>Total</p>
-                  <p>500</p>
+                  <p>Net Price</p>
+                  <h6>
+                    <b>{this.props.net_price}</b> ETB
+                  </h6>
                 </div>
                 <div className="price-wrap">
                   <p>Excise Tax(10%)</p>
-                  <p>500</p>
+                  <h6>
+                    <b>{this.props.excise_tax}</b> ETB
+                  </h6>
                 </div>
                 <div className="price-wrap">
-                  <p>Total After Tax</p>
-                  <p>500</p>
+                  <p>Total After Vat(15%)</p>
+                  <h6>
+                    <b>{this.props.add_vat}</b> ETB
+                  </h6>
                 </div>
+                <hr />
                 <div className="price-wrap">
-                  <p>Vat(15%)</p>
-                  <p>500</p>
+                  <p>Total(gross price)</p>
+                  <h6>
+                    <b>{this.props.gross_price}</b> ETB
+                  </h6>
                 </div>
               </div>
             </section>
@@ -187,6 +242,11 @@ const mapStateToProps = (state) => {
     category: state.order.category,
     customers: state.order.customers,
     product: state.order.product,
+
+    net_price: state.order.net_price,
+    add_vat: state.order.add_vat,
+    excise_tax: state.order.excise_tax,
+    gross_price: state.order.gross_price,
 
     data: state.order.data,
     loading: state.order.loading,
@@ -214,17 +274,21 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(actionTypes.changeInput_order(data, errors));
     },
 
-    onHandleInputChange_items: (data) => {
-      dispatch(actionTypes.changeInput_order_items(data));
+    onHandleInputChange_items: (data, PLACE_HOLEDR_VALUE) => {
+      dispatch(actionTypes.changeInput_order_items(data, PLACE_HOLEDR_VALUE));
     },
 
     onHandleSubmitError: (error) => {
       dispatch(actionTypes.changeError_order(error));
     },
 
-    // onSubmitForm: (data) => {
-    //   dispatch(actionTypes.succesSubmitForm(data));
-    // },
+    calculateTotal: (itemsData) => {
+      dispatch(actionTypes.calculateTotal_order(itemsData));
+    },
+
+    onSubmitForm: (data) => {
+      dispatch(actionTypes.succesSubmitForm_order(data));
+    },
   };
 };
 

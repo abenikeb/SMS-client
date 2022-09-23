@@ -13,6 +13,8 @@ const initialState = {
   add_vat: 0.0,
   excise_tax: 0.0,
   gross_price: 0.0,
+  orders: [],
+
   customers: [],
   categories: [],
   product: [],
@@ -37,30 +39,9 @@ const reducer = (state = initialState, action) => {
       };
 
     case actionTypes.INPUT_CHANGE_FOR_ORDER_ITEMS:
-      // const state_data = state.data.items;
-      // let qty = state_data[0];
-
-      produce(state, (draftState) => {
-        draftState.data.items[0].qty = action.data;
+      return produce(state, (draftState) => {
+        draftState.data.items[action.textInput].qty = action.data;
       });
-
-    // console.log("...state.data.items", state_data);
-    // return {
-
-    // ...state,
-    // data: {
-    //   ...state.data,
-    //   items: [
-    //     ...state.data.items,
-    //    state.data.items[0].map(item => {
-    //     return {
-    //       [item.qty]
-    //     }
-    //    })
-    //   ],
-    // },
-    // error: action.error,
-    // };
 
     case actionTypes.SET_CUSTOMERS_FOR_ORDER:
       let customers = action.customers.map((list) => list.customer);
@@ -79,7 +60,6 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.SET_PRODUCT_PRICE_FOR_ORDER:
       let products = action.result.map((res) => res.product);
-      //   console.log("PRO", product);
       return {
         ...state,
         data: {
@@ -90,10 +70,41 @@ const reducer = (state = initialState, action) => {
               product_sku: pro.product_sku,
               price: pro.price,
               qty_promotion: 0,
-              qty: 2,
+              qty: 0,
             };
           }),
         },
+      };
+
+    case actionTypes.CALCULATE_TOTAL_ORDER:
+      const net_price = action.netPrice;
+      const add_vat = action.add_vat;
+      const excise_tax = action.excise_tax;
+      const gross_price = action.gross_price;
+      return {
+        ...state,
+        net_price: net_price,
+        add_vat: add_vat,
+        excise_tax: excise_tax,
+        gross_price: gross_price,
+      };
+
+    case actionTypes.INIT_SUBMIT_FORM_ORDER:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case actionTypes.SUCCESS_SUBMIT_FORM_ORDER:
+      return {
+        ...state,
+        orders: state.orders.concat(action.data),
+      };
+
+    case actionTypes.FAIL_SUBMIT_FORM_ORDER:
+      return {
+        ...state,
+        errors: action.errors,
       };
 
     // case actionTypes.FETCH_CUSTOMER:

@@ -46,4 +46,6 @@ export {
   initCustomers_order,
   initProductWithPrice,
   changeInput_order_items,
+  calculateTotal_order,
+  succesSubmitForm_order,
 } from "./orderAction";

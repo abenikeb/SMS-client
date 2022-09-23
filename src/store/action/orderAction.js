@@ -4,28 +4,31 @@ import {
   getCategories,
   GetProductWithPrice_ByCategory,
   getCustomerByCategory,
-  getCustomers,
+  createOrder,
 } from "../../services/orderService";
 
-// export const initSubmitForm = () => {
-//   return {
-//     type: actionTypes.INIT_SUBMIT_FORM,
-//   };
-// };
+export const EXCISE_PERCENT = 0.1;
+export const VAT_PERCENT = 0.15;
 
-// export const setForm = (customer) => {
-//   return {
-//     type: actionTypes.SUCCESS_SUBMIT_FORM,
-//     data: customer,
-//   };
-// };
+export const initSubmitForm = () => {
+  return {
+    type: actionTypes.INIT_SUBMIT_FORM_ORDER,
+  };
+};
 
-// export const failSubmitForm = (errors) => {
-//   return {
-//     type: actionTypes.FAIL_SUBMIT_FORM,
-//     errors: errors,
-//   };
-// };
+export const setForm = (order) => {
+  return {
+    type: actionTypes.SUCCESS_SUBMIT_FORM_ORDER,
+    data: order,
+  };
+};
+
+export const failSubmitForm = (errors) => {
+  return {
+    type: actionTypes.FAIL_SUBMIT_FORM_ORDER,
+    errors: errors,
+  };
+};
 
 // export const submitFormValidationError = (ex) => {
 //   return {
@@ -34,28 +37,31 @@ import {
 //   };
 // };
 
-// export const succesSubmitForm = (data) => {
-//   return async (dispatch) => {
-//     dispatch(initSubmitForm());
-//     try {
-//       const { data: customer } = await saveCustomer(data);
-//       dispatch(setForm(customer));
-//     } catch (ex) {
-//       if (ex.response && ex.response.status === 400) {
-//         dispatch(submitFormValidationError(ex));
-//       } else if (ex.response && ex.response.status === 401) {
-//         dispatch(failSubmitForm(ex.response.data.message));
-//       } else if (ex.response && ex.response.status === 404) {
-//         dispatch(failSubmitForm(ex.response.data.message));
-//       }
-//     }
-//   };
-// };
-export const changeInput_order_items = (data) => {
-  // console.log("Data", data);
+export const succesSubmitForm_order = (data) => {
+  console.log("data", data);
+  // return async (dispatch) => {
+  //   dispatch(initSubmitForm());
+  //   try {
+  //     const { data: order } = await createOrder(data);
+  //     dispatch(setForm(order));
+  //   } catch (ex) {
+  //     if (ex.response && ex.response.status === 400) {
+  //       // dispatch(submitFormValidationError(ex));
+  //       dispatch(failSubmitForm(ex.response.data.message));
+  //     } else if (ex.response && ex.response.status === 401) {
+  //       dispatch(failSubmitForm(ex.response.data.message));
+  //     } else if (ex.response && ex.response.status === 404) {
+  //       dispatch(failSubmitForm(ex.response.data.message));
+  //     }
+  //   }
+  // };
+};
+
+export const changeInput_order_items = (data, PLACE_HOLEDR_VALUE) => {
   return {
     type: actionTypes.INPUT_CHANGE_FOR_ORDER_ITEMS,
     data: data,
+    textInput: PLACE_HOLEDR_VALUE,
   };
 };
 
@@ -68,6 +74,7 @@ export const changeInput_order = (data, errors) => {
 };
 
 export const changeError_order = (error) => {
+  console.log("error", error);
   return {
     type: actionTypes.CHANGE_ERROR_FOR_ORDER,
     error: error,
@@ -91,20 +98,6 @@ export const initCustomers_order = (id) => {
     }
   };
 };
-
-// export const setCustomer = (customer) => {
-//   return {
-//     type: actionTypes.FETCH_CUSTOMER,
-//     customer: customer,
-//   };
-// };
-
-// export const fetchCustomer = (customerId) => {
-//   return async (dispatch) => {
-//     const { data: customer } = await getCustomer(customerId);
-//     dispatch(setCustomer(customer));
-//   };
-// };
 
 export const setCategories = (categories) => {
   return {
@@ -138,11 +131,34 @@ export const initProductWithPrice = (category_id) => {
       const { data: result } = await GetProductWithPrice_ByCategory(
         category_id
       );
-      console.log("result", result);
       dispatch(setProductWithPrice(result));
     } catch (ex) {
       console.log("getCategories-Err", ex);
     }
+  };
+};
+
+export const calculateTotal_order = (itemsData) => {
+  const netPrice = itemsData
+    .map((item) => Number(item.qty) * Number(item.price))
+    .reduce((previousValue, currentValue) => {
+      return previousValue + currentValue;
+    }, 0);
+
+  const excise_tax = EXCISE_PERCENT * netPrice + netPrice;
+
+  const add_vat = VAT_PERCENT * excise_tax;
+
+  const gross_price = excise_tax + add_vat;
+
+  console.log({ netPrice: netPrice });
+
+  return {
+    type: actionTypes.CALCULATE_TOTAL_ORDER,
+    netPrice: netPrice.toFixed(2),
+    excise_tax: excise_tax.toFixed(2),
+    add_vat: add_vat.toFixed(2),
+    gross_price: gross_price.toFixed(2),
   };
 };
 

@@ -24,6 +24,15 @@ export const GetProductWithPrice_ByCategory = (id) => {
   );
 };
 
+export const createOrder = (order) => {
+  if (order.id) {
+    let { id, ...newOrder } = order;
+    return http.put(`${apiURLOrder}/update/${id}`, newOrder);
+  }
+
+  return http.post(`${apiURLOrder}/create`, order);
+};
+
 export const getCustomer = (id) => {
   return http.get(`${apiURLCustomer}/get-customers-by-id/${id}`);
 };
