@@ -10,7 +10,9 @@ const layout = (props) => {
   return (
     <Auxiliary>
       {/* <MenuToggle/> */}
-      <Toolbar user={props.userData} isAuth={props.isAuthenticated} />
+      {props.isAuthenticated && (
+        <Toolbar user={props.userData} isAuth={props.isAuthenticated} />
+      )}
       <SideNavigation isAuth={props.isAuthenticated} />
       <main className="content">{props.children}</main>
     </Auxiliary>

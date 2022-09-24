@@ -122,6 +122,16 @@ class Customer extends Form {
               {this.renderButton("Submit", "btn-primary-wrap")}
             </section>
           </form>
+          {/* <div className="drop-section">
+            <label tabIndex={0} className="btn m-1">
+              Click
+            </label>
+            <ul tabIndex={0} className="dropdown-content drop-section-wrap">
+              <li>
+                <a>Item 1</a>
+              </li>
+            </ul>
+          </div> */}
         </section>
       </Auxiliary>
     );

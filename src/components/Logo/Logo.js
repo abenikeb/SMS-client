@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import logo from "../../assets/logo.jpg";
 import "./Logo.css";
 
@@ -7,10 +8,11 @@ const Logo = () => {
     // <div className="logo">
     //   <img src={logo} alt="logo" />
     // </div>
-    <div className="flex-1">
-      <a className="btn btn-ghost normal-case text-2xl text-primary font-bold">
-        SMS
-      </a>
+    <div className="logo-wrap flex justify-center items-center">
+      <Link to="/" className="logo-content">
+        AHAZ <span className=" text-gray-700">TEC</span>
+      </Link>
+      <span className="text-sm text-gray-500"> 1.0.0</span>
     </div>
   );
 };

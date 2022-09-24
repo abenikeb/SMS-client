@@ -1,3 +1,18 @@
+.logo-wrap {
+  @apply flex-1 bg-gray-100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 290px;
+  height: 80px;
+  z-index: 100;
+}
+
+.logo-content {
+  @apply btn btn-ghost normal-case text-primary font-bold;
+  font-size: 2em;
+}
+
 .logo img {
   width: 40px;
 }

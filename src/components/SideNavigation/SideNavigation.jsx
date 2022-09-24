@@ -7,7 +7,7 @@ const SideNavigation = (props) => {
   return (
     <aside className="aside">
       <nav>
-        <NavigationItems isAuthenticated={props.isAuth} />
+        {props.isAuth && <NavigationItems isAuthenticated={props.isAuth} />}
       </nav>
     </aside>
   );

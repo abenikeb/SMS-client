@@ -30,7 +30,9 @@ class Login extends Form {
       <form onSubmit={this.handleSubmit}>
         {this.renderInput("Tel", "tel")}
         {this.renderInput("Password", "password")}
-        {this.renderButton("Login", "btn-primary-wrap")}
+        <div className="mt-5 pr-10">
+          {this.renderButton("Login", "btn-primary-wrap-block")}
+        </div>
       </form>
     );
     if (this.props.loading) {
@@ -47,7 +49,7 @@ class Login extends Form {
         {authNavigate}
         <div className="card-container">
           <div className="card-body">
-            <h1>Login Form</h1>
+            <p className="text-center text-2xl mb-3">Log in to your account</p>
             {form}
           </div>
         </div>

@@ -2,6 +2,10 @@
   @apply btn btn-active btn-sm btn-primary text-white;
 }
 
+.btn-primary-wrap-block {
+  @apply btn btn-active btn-block btn-primary text-white;
+}
+
 .btn-success-ghost {
   @apply btn btn-outline btn-sm;
 }

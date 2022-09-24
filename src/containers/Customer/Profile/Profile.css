@@ -26,3 +26,11 @@ h1 {
   padding-left: 79%;
   gap: 10px;
 }
+
+/* .drop-section {
+  @apply dropdown dropdown-end;
+}
+
+.drop-section-wrap {
+  @apply menu p-2 shadow bg-base-100 rounded-box w-52;
+} */

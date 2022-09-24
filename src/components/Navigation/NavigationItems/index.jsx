@@ -2,11 +2,13 @@ import React from "react";
 import NavigationItem from "./NavigationItem";
 import dashboard_icon from "../../../assets/dashboard.svg";
 import home_black from "../../../assets/home_black.svg";
+import Logo from "../../Logo/Logo";
 import "./NavigationItems.css";
 
 const NavigationItems = (props) => {
   return (
     <div>
+      <Logo />
       <ul className="NavigationItems">
         {/* Dashboard Section */}
         {props.isAuthenticated && (
