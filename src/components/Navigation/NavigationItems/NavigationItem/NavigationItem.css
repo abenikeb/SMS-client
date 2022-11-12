@@ -16,6 +16,10 @@ Li a img {
   width: 100%;
 }
 
+.menu-title-lable {
+  @apply text-xs;
+}
+
 .menu-list li img {
   opacity: 0.5;
 }

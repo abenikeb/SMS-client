@@ -27,14 +27,16 @@ const NavigationItems = (props) => {
             to="/customer/new"
             label="Customer"
             page="Add Customer"
-            img={home_black}
+            // img={home_black}
+            icon="fa-solid fa-user-plus"
           />
         )}
         {props.isAuthenticated && (
           <NavigationItem
             to="/customers"
             page="View Customer"
-            img={dashboard_icon}
+            // img={dashboard_icon}
+            icon="fa-solid fa-users"
           />
         )}
 
@@ -44,11 +46,15 @@ const NavigationItems = (props) => {
             to="/add_order/new"
             label="Sales"
             page="Create Oder"
-            img={home_black}
+            icon="fa-solid fa-folder-plus"
           />
         )}
         {props.isAuthenticated && (
-          <NavigationItem to="/view_order" page="View Order" img={home_black} />
+          <NavigationItem
+            to="/view_orders"
+            page="View Order"
+            icon="fa-solid fa-list"
+          />
         )}
 
         {/* Customer Category Section */}
@@ -57,14 +63,14 @@ const NavigationItems = (props) => {
             to="/add_category/new"
             label="Customer Category"
             page="Add Category"
-            img={home_black}
+            icon="fa-solid fa-layer-group"
           />
         )}
         {props.isAuthenticated && (
           <NavigationItem
             to="/view_category"
             page="View Category"
-            img={dashboard_icon}
+            icon="fa-solid fa-list"
           />
         )}
 
@@ -74,14 +80,14 @@ const NavigationItems = (props) => {
             to="/add_product/new"
             label="Product"
             page="Add Product"
-            img={home_black}
+            icon="fa-solid fa-plus"
           />
         )}
         {props.isAuthenticated && (
           <NavigationItem
             to="/view_product"
             page="View Product"
-            img={dashboard_icon}
+            icon="fa-solid fa-list"
           />
         )}
 
@@ -91,14 +97,14 @@ const NavigationItems = (props) => {
             to="/add_promotion/new"
             label="Promotion"
             page="Add Promotion"
-            img={home_black}
+            icon="fa-solid fa-rectangle-ad"
           />
         )}
         {props.isAuthenticated && (
           <NavigationItem
             to="/view_promotion"
             page="View Promotion"
-            img={dashboard_icon}
+            icon="fa-solid fa-list"
           />
         )}
 
@@ -108,14 +114,14 @@ const NavigationItems = (props) => {
             to="/add_price/new"
             label="Price"
             page="Add Price"
-            img={home_black}
+            icon="fa-solid fa-tag"
           />
         )}
         {props.isAuthenticated && (
           <NavigationItem
             to="/view_price"
             page="View Price"
-            img={dashboard_icon}
+            icon="fa-solid fa-list"
           />
         )}
       </ul>

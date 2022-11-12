@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./NavigationItem.css";
 
@@ -11,7 +12,11 @@ const NavigationItem = (props) => {
       </li>
       <li>
         <NavLink to={props.to} exact={props.exact}>
-          <img src={props.img} alt="dashboard_icon" className="w-5" />
+          {props.img ? (
+            <img src={props.img} alt="dashboard_icon" className="w-5" />
+          ) : (
+            <FontAwesomeIcon icon={props.icon} className="text-lg" />
+          )}
           {props.page}
         </NavLink>
       </li>
