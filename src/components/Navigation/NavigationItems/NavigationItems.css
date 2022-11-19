@@ -1,12 +1,21 @@
 .NavigationItems {
-  @apply menu bg-gray-100 w-60 p-2 shadow-sm;
+  @apply menu bg-gray-50 w-60 p-2 shadow-sm;
   position: fixed;
   top: 80px;
   left: 0;
   height: 90%;
   width: 290px;
-  z-index: 100;
+  z-index: 50;
   overflow: scroll;
+}
+
+.dashboard a {
+  @apply flex items-center gap-2 text-primary;
+}
+
+.dashboard a:active,
+.dashboard a:focus {
+  @apply text-white;
 }
 
 /* mobile view */

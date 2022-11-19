@@ -40,6 +40,40 @@ Li a img {
   display: block;
 }
 
+.collapse-y {
+  @apply px-5;
+  position: relative;
+  box-sizing: border-box;
+  margin-bottom: 18px;
+}
+
+.collapse-header {
+  @apply flex flex-row justify-between items-center cursor-pointer;
+  color: #2dd4bf;
+}
+
+.collapse-y-content {
+  /* position: absolute;
+  top: 35px;
+  left: 40px; */
+  padding-top: 9px;
+  transition: all 0.5s ease-out;
+}
+
+.collapse-y-content-close {
+  /* visibility: hidden; */
+  display: none;
+  /* transform: translateY(-1.5em); */
+  opacity: 0;
+}
+
+.collapse-y-content-open {
+  /* visibility: visible; */
+  display: block;
+  opacity: 1;
+  /* transform: translateY(0%); */
+}
+
 @media (max-width: 499px) {
   .NavigationItem {
     margin: 10px 0;

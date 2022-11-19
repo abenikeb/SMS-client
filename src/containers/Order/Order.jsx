@@ -2,7 +2,8 @@ import React from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
 
-import * as customerAction from "../../store/action/index";
+import * as orderAction from "../../store/action/index";
+
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
 import Form from "../../components/Form/Form";
@@ -14,8 +15,8 @@ import Spinner from "../../components/UI/Spinner/Spinner";
 
 class Order extends Form {
   componentDidMount() {
-    this.props.onInitCustomers();
-    this.props.onInitCategories();
+    this.props.onInitOrders();
+    // this.props.onInitCategories();
   }
 
   handlePageChange = (page) => {
@@ -44,19 +45,20 @@ class Order extends Form {
 
   render() {
     const {
-      customers_: allCustomers,
-      currentPage_: currentPage,
-      pageSize_: pageSize,
-      searchQuery_: searchQuery,
-      sortColumn_: sortColumn,
-      property_: property,
-      viewModal_: viewModal,
+      orders,
+      currentPage,
+      pageSize,
+      searchQuery,
+      sortColumn,
+      // property_: property,
+      // viewModal_: viewModal,
     } = this.props;
 
-    let filtered = allCustomers;
+    console.log("orders", orders);
+    let filtered = orders;
 
     if (searchQuery) {
-      filtered = allCustomers.filter((m) =>
+      filtered = orders.filter((m) =>
         m.first_name.toLowerCase().startsWith(searchQuery.toLowerCase())
       );
     }
@@ -66,77 +68,79 @@ class Order extends Form {
     let paginateItems = paginate(sortedList, currentPage, pageSize);
     const itemsSize = filtered.length;
 
-    let viewCustomer = <ViewCustomer customer={property} />;
-    if (!property) {
-      viewCustomer = <Spinner />;
-    }
+    // let viewOrder = <ViewCustomer customer={property} />;
+    // if (!property) {
+    //   viewOrder = <Spinner />;
+    // }
+
     return (
       <Auxiliary>
         <ViewOrder
-          onHandlePageChange={this.handlePageChange}
+          // onHandlePageChange={this.handlePageChange}
           sortColumns={sortColumn}
-          onSort={this.handleSort}
-          raiseProperty={this.handleraiseProperty}
-          onSearch={this.handleSearch}
-          searchQuery={searchQuery}
-          currentPage={currentPage}
-          pageSize={pageSize}
+          // onSort={this.handleSort}
+          // raiseProperty={this.handleraiseProperty}
+          // onSearch={this.handleSearch}
+          // searchQuery={searchQuery}
+          // currentPage={currentPage}
+          // pageSize={pageSize}
           itemsSize={itemsSize}
           paginateItems={paginateItems}
         />
-        <Modal show={viewModal} closeModal={this.handleModalClose}>
-          {viewCustomer}
-        </Modal>
+        {/* <Modal show={viewModal} closeModal={this.handleModalClose}>
+          {viewOrder}
+        </Modal> */}
       </Auxiliary>
     );
   }
 }
 const mapStateToProps = (state) => {
   return {
-    customers_: state.customers.customers,
-    categories_: state.customers.categories,
-    sortColumn_: state.customers.sortColumn,
-    searchQuery_: state.customers.searchQuery,
-    sortColumn_: state.customers.sortColumn,
-    currentPage_: state.customers.currentPage,
-    pageSize_: state.customers.pageSize,
-    viewModal_: state.customers.viewModal,
-    property_: state.customers.property,
+    orders: state.order.orders,
+    // categories_: state.customers.categories,
+    // sortColumn_: state.customers.sortColumn,
+    searchQuery: state.order.searchQuery,
+    sortColumn: state.order.sortColumn,
+    currentPage: state.order.currentPage,
+    pageSize: state.order.pageSize,
+    // viewModal_: state.customers.viewModal,
+    // property_: state.customers.property,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onInitCustomers: () => {
-      dispatch(customerAction.initCustomers());
+    onInitOrders: () => {
+      dispatch(orderAction.initOrders());
     },
 
-    onInitCategories: () => {
-      dispatch(customerAction.initCategories());
-    },
+    // onInitCategories: () => {
+    //   dispatch(customerAction.initCategories());
+    // },
 
-    onHandleCurrentPage: (page) => {
-      dispatch(customerAction.changePage(page));
-    },
+    // onHandleCurrentPage: (page) => {
+    //   dispatch(customerAction.changePage(page));
+    // },
 
-    onSortColumn: (sortColumn) => {
-      dispatch(customerAction.sortColumn(sortColumn));
-    },
+    // onSortColumn: (sortColumn) => {
+    //   dispatch(customerAction.sortColumn(sortColumn));
+    // },
 
-    onHandleOpenModal: () => {
-      dispatch(customerAction.openModal());
-    },
+    // onHandleOpenModal: () => {
+    //   dispatch(customerAction.openModal());
+    // },
 
-    onHandleCloseModal: () => {
-      dispatch(customerAction.closeModal());
-    },
+    // onHandleCloseModal: () => {
+    //   dispatch(customerAction.closeModal());
+    // },
 
-    onHandleraiseProperty: (customer) => {
-      dispatch(customerAction.setProperty(customer));
-    },
-    onHandleSearchQuery: (value) => {
-      dispatch(customerAction.searchQuery(value));
-    },
+    // onHandleraiseProperty: (customer) => {
+    //   dispatch(customerAction.setProperty(customer));
+    // },
+
+    // onHandleSearchQuery: (value) => {
+    //   dispatch(customerAction.searchQuery(value));
+    // },
   };
 };
 export default connect(

@@ -16,13 +16,19 @@ import "./AddOrder.css";
 class AddOrder extends Component {
   schema = {
     id: Joi.string(),
-    category_id: Joi.required().label("Category"),
-    customer_id: Joi.required().label("Customer"),
-    items: Joi.array(),
+    category_id: Joi.string().required().label("Category"),
+    customer_id: Joi.string().required().label("Customer"),
+    items: Joi.array().required().label("Items"),
   };
 
   populateCategories = async () => {
     this.props.onInitCategories();
+  };
+
+  populateCustomer = async () => {
+    let customerId = this.props.params.id;
+    if (customerId === "new") return;
+    this.props.onFetchCustomer(customerId);
   };
 
   async componentDidMount() {
@@ -45,12 +51,6 @@ class AddOrder extends Component {
       this.props.calculateTotal(this.props.data.items);
     }
   }
-
-  populateCustomer = async () => {
-    let customerId = this.props.params.id;
-    if (customerId === "new") return;
-    this.props.onFetchCustomer(customerId);
-  };
 
   validateInput = (target) => {
     let err = Joi.validate(
@@ -76,6 +76,8 @@ class AddOrder extends Component {
   validate = () => {
     const options = { abortEarly: false };
     const { error } = Joi.validate(this.props.data, this.schema, options);
+    console.log("this.props.data", this.props.data);
+    console.log("error", error);
     return error != null ? error : {};
   };
 
@@ -84,6 +86,7 @@ class AddOrder extends Component {
 
     let errors = {};
     const error = this.validate();
+
     const errCount = Object.keys(error).length;
 
     if (errCount > 0) {
@@ -123,7 +126,7 @@ class AddOrder extends Component {
     let customerUpdateRedirect = null;
 
     if (this.props.isOrderUpdate) {
-      toast.info("Successfuly Updated");
+      toast.info("Successfuly Order Crated");
       customerUpdateRedirect = <Navigate to="/view_order" />;
     }
 
@@ -352,10 +355,10 @@ const mapStateToProps = (state) => {
     gross_price: state.order.gross_price,
 
     data: state.order.data,
-    loading: state.order.loading,
     error: state.order.error,
     errors: state.order.errors,
-    isOrderUpdate: state.order.isCustomerUpdate,
+    loading: state.order.loading,
+    isOrderUpdate: state.order.isOrderUpdate,
   };
 };
 
@@ -381,8 +384,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(actionTypes.changeInput_order_items(data, PLACE_HOLEDR_VALUE));
     },
 
-    onHandleSubmitError: (error) => {
-      dispatch(actionTypes.changeError_order(error));
+    onHandleSubmitError: (errors) => {
+      dispatch(actionTypes.changeError_order(errors));
     },
 
     calculateTotal: (itemsData) => {

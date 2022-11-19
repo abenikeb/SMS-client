@@ -1,8 +1,8 @@
 import http from "./httpServices";
 // import apiEndPoint from "../config.json";
 
-// const apiEndPoint = "http://localhost:5000/api";
-const apiEndPoint = "https://sales-management-system-mvp.herokuapp.com/api";
+const apiEndPoint = "http://localhost:5000/api";
+// const apiEndPoint = "https://sales-management-system-mvp.herokuapp.com/api";
 
 let apiURLOrder = apiEndPoint + "/order";
 let apiURLCustomer = apiEndPoint + "/user";
@@ -36,4 +36,8 @@ export const createOrder = (order) => {
 
 export const getCustomer = (id) => {
   return http.get(`${apiURLCustomer}/get-customers-by-id/${id}`);
+};
+
+export const getOrders = () => {
+  return http.get(apiURLOrder + "/get");
 };

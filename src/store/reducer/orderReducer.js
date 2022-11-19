@@ -31,6 +31,14 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.INIT_ORDERS:
+      return {
+        ...state,
+        orders: action.orders,
+        isOrderUpdate: false,
+        error: {},
+      };
+
     case actionTypes.INPUT_CHANGE_FOR_ORDER:
       return {
         ...state,

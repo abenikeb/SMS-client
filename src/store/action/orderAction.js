@@ -5,6 +5,7 @@ import {
   GetProductWithPrice_ByCategory,
   getCustomerByCategory,
   createOrder,
+  getOrders,
 } from "../../services/orderService";
 
 export const EXCISE_PERCENT = 0.1;
@@ -73,10 +74,10 @@ export const changeInput_order = (data, errors) => {
   };
 };
 
-export const changeError_order = (error) => {
+export const changeError_order = (errors) => {
   return {
     type: actionTypes.CHANGE_ERROR_FOR_ORDER,
-    error: error,
+    error: errors,
   };
 };
 
@@ -158,6 +159,25 @@ export const calculateTotal_order = (itemsData) => {
     excise_tax: excise_tax.toFixed(2),
     add_vat: add_vat.toFixed(2),
     gross_price: gross_price.toFixed(2),
+  };
+};
+
+export const setOrders = (orders) => {
+  return {
+    type: actionTypes.INIT_ORDERS,
+    orders: orders,
+  };
+};
+
+export const initOrders = () => {
+  return async (dispatch) => {
+    try {
+      const { data: orders } = await getOrders();
+      console.log("GET-ORDERS", orders);
+      dispatch(setOrders(orders));
+    } catch (ex) {
+      console.log("ERR-INIT-Orders", ex);
+    }
   };
 };
 

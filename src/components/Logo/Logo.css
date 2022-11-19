@@ -1,11 +1,11 @@
 .logo-wrap {
-  @apply flex-1 bg-gray-100;
+  @apply flex-1 bg-gray-50;
   position: fixed;
   top: 0;
   left: 0;
   width: 290px;
   height: 80px;
-  z-index: 100;
+  z-index: 50;
 }
 
 .logo-content {

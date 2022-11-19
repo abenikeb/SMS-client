@@ -17,19 +17,20 @@ class ViewOrder extends Component {
   columns = [
     {
       key: "select",
-      content: (customer) => <input type="checkbox" className="checkbox" />,
+      content: (order) => <input type="checkbox" className="checkbox" />,
     },
-    {
-      path: "first_name",
-      label: "Name",
-      content: (customer) => (
-        <Link to={`customer/${customer.id}`}>{customer.first_name}</Link>
-      ),
-    },
-    { path: "name", label: "Category" },
-    { path: "tel", label: "Tel" },
-    { path: "territory", label: "Teritory" },
-    { path: "city", label: "City" },
+    // {
+    //   path: "id",
+    //   label: "Order_Id ",
+    //   content: (order) => (
+    //     <Link to={`customer/${customer.id}`}>{customer.first_name}</Link>
+    //   ),
+    // },
+    { path: "id", label: "OrderId" },
+    { path: "gross_price", label: "Total price" },
+    { path: "approved_by", label: "Approved by" },
+    { path: "first_name", label: "Customer Name" },
+    { path: "name", label: "Status" },
     {
       key: "action",
       content: (customer) => (
@@ -42,7 +43,7 @@ class ViewOrder extends Component {
               <li>
                 <Link
                   className="btn btn-sm btn-ghost"
-                  to={`/customer/${customer.id}`}
+                  to={`/order/${customer.id}`}
                 >
                   Edit
                 </Link>
@@ -65,7 +66,7 @@ class ViewOrder extends Component {
     return (
       <Auxiliary>
         <div className="container-list">
-          <h1>User List</h1>
+          <h1>Order List</h1>
           <hr />
           <header>
             <div>
@@ -77,8 +78,8 @@ class ViewOrder extends Component {
             <div>
               <Button label="Import Excel" btn_class="btn-success-ghost" />
               <Button label="Export Excel" btn_class="btn-success-ghost" />
-              <Link to="/customer/new" className="btn btn-primary btn-sm">
-                Add Customer
+              <Link to="/add_order/new" className="btn btn-primary btn-sm">
+                Add Order
               </Link>
             </div>
           </header>
