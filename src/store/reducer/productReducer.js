@@ -3,11 +3,12 @@ import * as actionTypes from "../action/actionTypes";
 const initialState = {
   data: {
     product_sku: "",
-    price: "",
-    usersCategory: "",
+    _desc: "",
   },
   error: {},
   errors: {},
+  products: [],
+
   categories: [],
   loading: false,
   property: null,
@@ -15,18 +16,25 @@ const initialState = {
   pageSize: 5,
   searchQuery: "",
   viewModal: false,
-  isCategoryUpdate: false,
+  isProductUpdate: false,
   sortColumn: { path: "name", order: "acs" },
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    // case actionTypes.CHANGE_CATEGORY_INPUT:
-    //   return {
-    //     ...state,
-    //     data: action.data,
-    //     error: action.error,
-    //   };
+    case actionTypes.INIT_PRODUCT:
+      return {
+        ...state,
+        products: action.products,
+        isProductUpdate: false,
+      };
+
+    case actionTypes.CHANGE_PRODUCT_INPUT:
+      return {
+        ...state,
+        data: action.data,
+        error: action.error,
+      };
 
     // case actionTypes.CHANGE_CATEGORY_ERROR:
     //   return {
@@ -34,45 +42,37 @@ const reducer = (state = initialState, action) => {
     //     error: action.error,
     //   };
 
-    // case actionTypes.INIT_SUBMIT_CATEGORY_FORM:
-    //   return {
-    //     ...state,
-    //     loading: true,
-    //   };
-
-    // case actionTypes.FAIL_SUBMIT_CATEGORY_FORM:
-    //   return {
-    //     ...state,
-    //     errors: action.errors,
-    //     loading: false,
-    //   };
-
-    // case actionTypes.SUBMIT_CATEGORY_VALIDATION_ERROR:
-    //   let error = { ...state.error };
-    //   action.ex.response.data.map((res) => {
-    //     let keyIndex = Object.keys(res.err)[0];
-    //     error[res.property] = res.err[keyIndex];
-    //   });
-
-    //   return {
-    //     ...state,
-    //     error: error,
-    //     loading: false,
-    //   };
-
-    // case actionTypes.SUCCESS_SUBMIT_CATEGORY_FORM:
-    //   return {
-    //     ...state,
-    //     categories: state.categories.concat(action.data),
-    //     isCategoryUpdate: true,
-    //     loading: false,
-    //   };
-
-    case actionTypes.INIT_CATEGORIES:
+    case actionTypes.INIT_SUBMIT_PRODUCT_FORM:
       return {
         ...state,
-        categories: action.categories,
-        isCategoryUpdate: false,
+        loading: true,
+      };
+
+    case actionTypes.FAIL_SUBMIT_PRODUCT_FORM:
+      return {
+        ...state,
+        errors: action.errors,
+        loading: false,
+      };
+
+    case actionTypes.SUBMIT_PRODUCT_VALIDATION_ERROR:
+      let error = { ...state.error };
+      action.ex.response.data.map((res) => {
+        let keyIndex = Object.keys(res.err)[0];
+        error[res.property] = res.err[keyIndex];
+      });
+      return {
+        ...state,
+        error: error,
+        loading: false,
+      };
+
+    case actionTypes.SUCCESS_SUBMIT_PRODUCT_FORM:
+      return {
+        ...state,
+        products: state.products.concat(action.data),
+        isProductUpdate: true,
+        loading: false,
       };
 
     // case actionTypes.GET_CATEGORY:
@@ -85,11 +85,11 @@ const reducer = (state = initialState, action) => {
     //     },
     //   };
 
-    // case actionTypes.CHANGE_CATEGORY_PAGE:
-    //   return {
-    //     ...state,
-    //     currentPage: action.item,
-    //   };
+    case actionTypes.CHANGE_PRODUCT_PAGE:
+      return {
+        ...state,
+        currentPage: action.item,
+      };
 
     // case actionTypes.SORT_CATEGORY_COLUMN:
     //   return {

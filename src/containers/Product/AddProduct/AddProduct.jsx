@@ -16,19 +16,27 @@ import "./AddProduct.css";
 class AddProduct extends Form {
   schema = {
     id: Joi.string(),
-    name: Joi.string().required().label("Name"),
+    product_sku: Joi.string().required().label("Product_sku"),
     _desc: Joi.string().required().label("Description"),
   };
 
-  populateCategories = async () => {
-    let categoryId = this.props.params.id;
-    if (categoryId === "new") return;
+  // populateCategories = async () => {
+  //   let categoryId = this.props.params.id;
+  //   if (categoryId === "new") return;
 
-    this.props.onFetchCategory(categoryId);
-  };
+  //   this.props.onFetchCategory(categoryId);
+  // };
 
-  async componentDidMount() {
-    await this.populateCategories();
+  // async componentDidMount() {
+  //   await this.populateCategories();
+  // }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.errors !== this.props.errors) {
+      if (this.props.errors !== null) {
+        toast.error(this.props.errors);
+      }
+    }
   }
 
   handleBackAction = () => {
@@ -40,14 +48,14 @@ class AddProduct extends Form {
   };
 
   isUpdated() {
-    let categoryUpdateRedirect = null;
+    let productUpdateReirect = null;
 
-    if (this.props.isCategoryUpdate) {
+    if (this.props.isProductUpdate) {
       toast.info("Successfuly Updated");
-      categoryUpdateRedirect = <Navigate to="/view_category" />;
+      productUpdateReirect = <Navigate to="/view_product" />;
     }
 
-    return categoryUpdateRedirect;
+    return productUpdateReirect;
   }
 
   render() {
@@ -64,7 +72,7 @@ class AddProduct extends Form {
           {this.props.loading && <Spinner />}
           <form onSubmit={this.handleSubmit}>
             <section className="w-full">
-              {this.renderInput("Name", "name")}
+              {this.renderInput("Name", "product_sku")}
               {this.renderTextArea("Description", "_desc")}
             </section>
             <section className="button-container-add-product">
@@ -82,25 +90,25 @@ class AddProduct extends Form {
 
 const mapStateToProps = (state) => {
   return {
-    categories: state.categories.categories,
-    data: state.categories.data,
-    loading: state.categories.loading,
-    error: state.categories.error,
-    errors: state.categories.errors,
-    isCategoryUpdate: state.categories.isCategoryUpdate,
+    products: state.product.product,
+    data: state.product.data,
+    loading: state.product.loading,
+    error: state.product.error,
+    errors: state.product.errors,
+    isProductUpdate: state.product.isProductUpdate,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onFetchCategory: (customerId) => {
-      dispatch(actionTypes.getUserCategory(customerId));
-    },
+    // onFetchCategory: (customerId) => {
+    //   dispatch(actionTypes.getUserCategory(customerId));
+    // },
     onHandleInputChange: (data, errors) => {
-      dispatch(actionTypes.inputChange_category(data, errors));
+      dispatch(actionTypes.inputChange_product(data, errors));
     },
     onSubmitForm: (data) => {
-      dispatch(actionTypes.succesSubmitCategoryForm(data));
+      dispatch(actionTypes.succesSubmitProductForm(data));
     },
     onHandleSubmitError: (error) => {
       dispatch(actionTypes.inputError_category(error));

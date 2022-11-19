@@ -15,13 +15,17 @@ class ViewProduct extends Component {
       content: (customer) => <input type="checkbox" className="checkbox" />,
     },
     {
-      path: "name",
-      label: "CategoryName",
-      content: (category) => (
-        <Link to={`customer/${category.id}`}>{category.name}</Link>
-      ),
+      path: "product.product_sku",
+      label: "SKU",
     },
-    // { path: "name", label: "Category" },
+    {
+      path: "usersCategory",
+      label: "CategoryName",
+    },
+    {
+      path: "price",
+      label: "Price",
+    },
     {
       key: "action",
       content: (category) => (
@@ -67,8 +71,8 @@ class ViewProduct extends Component {
               />
             </div>
             <div>
-              <Link to="/add_category/new" className="btn btn-primary btn-sm">
-                Add Category
+              <Link to="/add_product/new" className="btn btn-primary btn-sm">
+                Add Product
               </Link>
             </div>
           </header>

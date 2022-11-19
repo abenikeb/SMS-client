@@ -1,58 +1,82 @@
 import * as actionTypes from "./actionTypes";
-import { GetProductsWithPriceAndCategory } from "../../services/productService";
+import {
+  GetProductsWithPriceAndCategory,
+  saveProduct,
+} from "../../services/productService";
 
-// export const initCategoryForm = () => {
-//   return {
-//     type: actionTypes.INIT_SUBMIT_CATEGORY_FORM,
-//   };
-// };
+export const setProducts = (products) => {
+  return {
+    type: actionTypes.INIT_PRODUCT,
+    products: products,
+  };
+};
 
-// export const setCategoryForm = (customer) => {
-//   return {
-//     type: actionTypes.SUCCESS_SUBMIT_CATEGORY_FORM,
-//     data: customer,
-//   };
-// };
+export const initProducts = () => {
+  return async (dispatch) => {
+    try {
+      const { data: products } = await GetProductsWithPriceAndCategory();
+      dispatch(setProducts(products));
+    } catch (ex) {
+      console.log("getCategories-Err", ex);
+    }
+  };
+};
 
-// export const failSubmitForm = (errors) => {
-//   return {
-//     type: actionTypes.FAIL_SUBMIT_CATEGORY_FORM,
-//     errors: errors,
-//   };
-// };
+export const initProductForm = () => {
+  return {
+    type: actionTypes.INIT_SUBMIT_PRODUCT_FORM,
+  };
+};
 
-// export const inputValidationError = (ex) => {
-//   return {
-//     type: actionTypes.SUBMIT_CATEGORY_VALIDATION_ERROR,
-//     ex: ex,
-//   };
-// };
+export const setProductForm = (product) => {
+  return {
+    type: actionTypes.SUCCESS_SUBMIT_PRODUCT_FORM,
+    data: product,
+  };
+};
 
-// export const succesSubmitCategoryForm = (data) => {
-//   return async (dispatch) => {
-//     dispatch(initCategoryForm());
-//     try {
-//       const { data: category } = await saveCategory(data);
-//       dispatch(setCategoryForm(category));
-//     } catch (ex) {
-//       if (ex.response && ex.response.status === 400) {
-//         dispatch(inputValidationError(ex));
-//       } else if (ex.response && ex.response.status === 401) {
-//         dispatch(failSubmitForm(ex.response.data.message));
-//       } else if (ex.response && ex.response.status === 404) {
-//         dispatch(failSubmitForm(ex.response.data.message));
-//       }
-//     }
-//   };
-// };
+export const failSubmitForm = (errors) => {
+  console.log({ errors: errors });
+  return {
+    type: actionTypes.FAIL_SUBMIT_PRODUCT_FORM,
+    errors: errors,
+  };
+};
 
-// export const inputChange_category = (data, errors) => {
-//   return {
-//     type: actionTypes.CHANGE_CATEGORY_INPUT,
-//     data: data,
-//     error: errors,
-//   };
-// };
+export const inputValidationError = (ex) => {
+  return {
+    type: actionTypes.SUBMIT_PRODUCT_VALIDATION_ERROR,
+    ex: ex,
+  };
+};
+
+export const succesSubmitProductForm = (data) => {
+  return async (dispatch) => {
+    dispatch(initProductForm());
+    try {
+      const { data: product } = await saveProduct(data);
+      dispatch(setProductForm(product));
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        dispatch(inputValidationError(ex));
+      } else if (ex.response && ex.response.status === 401) {
+        dispatch(failSubmitForm(ex.response.data.message));
+      } else if (ex.response && ex.response.status === 405) {
+        dispatch(failSubmitForm(ex.response.data));
+      } else if (ex.response && ex.response.status === 404) {
+        dispatch(failSubmitForm(ex.response.data.message));
+      }
+    }
+  };
+};
+
+export const inputChange_product = (data, errors) => {
+  return {
+    type: actionTypes.CHANGE_PRODUCT_INPUT,
+    data: data,
+    error: errors,
+  };
+};
 
 // export const inputError_category = (error) => {
 //   return {
@@ -94,12 +118,12 @@ import { GetProductsWithPriceAndCategory } from "../../services/productService";
 //   };
 // };
 
-// export const changePage_category = (page) => {
-//   return {
-//     type: actionTypes.CHANGE_CATEGORY_PAGE,
-//     item: page,
-//   };
-// };
+export const changePage_product = (page) => {
+  return {
+    type: actionTypes.CHANGE_PRODUCT_PAGE,
+    item: page,
+  };
+};
 
 // export const sortColumn_category = (column) => {
 //   return {

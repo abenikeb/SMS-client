@@ -9,11 +9,11 @@ import Spinner from "../../components/UI/Spinner/Spinner";
 import { Navigate } from "react-router-dom";
 import ViewCustomer from "../../components/Customer/ViewCustomer";
 import ViewProduct from "./ViewProduct/ViewProduct";
-import * as categoryAction from "../../store/action/index";
+import * as productAction from "../../store/action/index";
 
 class Product extends Component {
   componentDidMount() {
-    this.props.onInitCategories();
+    this.props.onInitProduct();
   }
 
   handlePageChange = (page) => {
@@ -42,7 +42,7 @@ class Product extends Component {
 
   render() {
     const {
-      categories: allCategories,
+      products,
       currentPage,
       pageSize,
       searchQuery,
@@ -51,10 +51,10 @@ class Product extends Component {
       viewModal,
     } = this.props;
 
-    let filtered = allCategories;
+    let filtered = products;
 
     if (searchQuery) {
-      filtered = allCategories.filter((m) =>
+      filtered = products.filter((m) =>
         m.name.toLowerCase().startsWith(searchQuery.toLowerCase())
       );
     }
@@ -98,45 +98,46 @@ class Product extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    categories: state.categories.categories,
-    sortColumn: state.categories.sortColumn,
-    searchQuery: state.categories.searchQuery,
-    sortColumn: state.categories.sortColumn,
-    currentPage: state.categories.currentPage,
-    pageSize: state.categories.pageSize,
-    viewModal: state.categories.viewModal,
-    property: state.categories.property,
+    products: state.product.products,
+    sortColumn: state.product.sortColumn,
+    searchQuery: state.product.searchQuery,
+    sortColumn: state.product.sortColumn,
+    currentPage: state.product.currentPage,
+    pageSize: state.product.pageSize,
+    viewModal: state.product.viewModal,
+    property: state.product.property,
     isAuthenticated: state.auth.token !== null,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onInitCategories: () => {
-      dispatch(categoryAction.initCategories());
+    onInitProduct: () => {
+      dispatch(productAction.initProducts());
     },
 
     onHandleCurrentPage: (page) => {
-      dispatch(categoryAction.changePage_category(page));
+      dispatch(productAction.changePage_product(page));
     },
 
     onSortColumn: (sortColumn) => {
-      dispatch(categoryAction.sortColumn_category(sortColumn));
+      dispatch(productAction.sortColumn_category(sortColumn));
     },
 
     onHandleOpenModal: () => {
-      dispatch(categoryAction.openModal_category());
+      dispatch(productAction.openModal_category());
     },
 
     onHandleCloseModal: () => {
-      dispatch(categoryAction.closeModal_category());
+      dispatch(productAction.closeModal_category());
     },
 
     onHandleraiseProperty: (customer) => {
-      dispatch(categoryAction.setProperty_category(customer));
+      dispatch(productAction.setProperty_category(customer));
     },
+
     onHandleSearchQuery: (value) => {
-      dispatch(categoryAction.searchQuery_category(value));
+      dispatch(productAction.searchQuery_category(value));
     },
   };
 };

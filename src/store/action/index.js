@@ -50,3 +50,20 @@ export {
   succesSubmitForm_order,
   initOrders,
 } from "./orderAction";
+
+export {
+  initProducts,
+  changePage_product,
+  inputChange_product,
+  succesSubmitProductForm,
+  // inputError_category,
+  // succesSubmitCategoryForm,
+  // initUserCategories,
+  // getUserCategory,
+  // changePage_product,
+  // sortColumn_category,
+  // openModal_category,
+  // closeModal_category,
+  // setProperty_category,
+  // searchQuery_category,
+} from "./productAction";

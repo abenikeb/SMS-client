@@ -24,6 +24,7 @@ class TableBody extends Component {
             {columns.map((column) => (
               <td key={column.path || column.key}>
                 {this.renderCell(item, column)}
+                {console.log("column", column.path)}
               </td>
             ))}
           </tr>

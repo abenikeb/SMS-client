@@ -14,11 +14,20 @@ export const GetProductsWithPriceAndCategory = () => {
 //   return http.get(`${apiURL}/get-user-category-by-id/${id}`);
 // };
 
-// export const saveCategory = (Category) => {
-//   if (Category.id) {
-//     let { id, ...newCategory } = Category;
-//     return http.put(`${apiURL}/update-user-category/${id}`, newCategory);
+// export const saveCategory = (Product) => {
+//   if (Product.id) {
+//     let { id, ...newProduct } = Product;
+//     return http.put(`${apiURL}/update-user-Product/${id}`, newProduct);
 //   }
 
-//   return http.post(`${apiURL}/create-user-category`, Category);
+//   return http.post(`${apiURL}/create-user-Product`, Product);
 // };
+
+export const saveProduct = (Product) => {
+  if (Product.id) {
+    let { id, ...newProduct } = Product;
+    return http.put(`${apiURL}/update/${id}`, newProduct);
+  }
+
+  return http.post(`${apiURL}/add`, Product);
+};
