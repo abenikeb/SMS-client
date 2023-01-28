@@ -1,7 +1,8 @@
 import http from "./httpServices";
 import jwtDecode from "jwt-decode";
+import config from "../config.json";
 // const apiEndPoint = "http://localhost:5000/api";
-const apiEndPoint = "https://sales-management-system-mvp.herokuapp.com/api";
+const apiEndPoint = config.apiEndPoint;
 
 let apiURL = apiEndPoint + "/user";
 

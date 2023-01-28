@@ -1,8 +1,8 @@
 import http from "./httpServices";
-// import apiEndPoint from "../config.json";
+import config from "../config.json";
 
-const apiEndPoint = "http://localhost:5000/api";
-// const apiEndPoint = "https://sales-management-system-mvp.herokuapp.com/api";
+// const apiEndPoint = "http://localhost:5000/api";
+const apiEndPoint = config.apiEndPoint;
 
 let apiURLOrder = apiEndPoint + "/order";
 let apiURLCustomer = apiEndPoint + "/user";
